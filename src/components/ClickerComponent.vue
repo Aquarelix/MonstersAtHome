@@ -18,9 +18,12 @@ export default({
 </script>
 
 <style scoped>
+*{
+    background-color: bisque;
+    border: 4px dotted black;
+}
 .clickerImage{
     border: 2px solid black;
     border-radius: 1rem;
 }
 </style>
-

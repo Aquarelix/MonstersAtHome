@@ -1,31 +1,42 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <HeaderComponentVue />
+      
+      <div class="clicker">
+        <ClickerComponentVue />
+      </div>
 
-    <div class="ClickerComponent">
-      <ClickerComponentVue />
-    </div>
+      <div class="upgrade">
+        <UpgradeComponentVue />
+      </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import HeaderComponentVue from '@/components/HeaderComponent.vue'
 import ClickerComponentVue from '@/components/ClickerComponent.vue'
+import UpgradeComponentVue from '@/components/UpgradeComponent.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld,
-    ClickerComponentVue
+    HeaderComponentVue,
+    ClickerComponentVue,
+    UpgradeComponentVue
   }
 }
 </script>
 
 <!-- Scoped: you will only style the component-->
 <style scoped>
-  .ClickerComponent{
-    background-color: aqua;
+  .clicker{
+    width: 40%;
+    float: left;
+  }
+
+  .upgrade{
+    width: 60%;
+    float: left;
   }
 </style>
