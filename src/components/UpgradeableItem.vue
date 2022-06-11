@@ -18,18 +18,24 @@ export default({
             imgPath: require('../assets/' + this.img), 
             currentCosts: this.initalCost,
             itemCounter: 0,
+            interval: null
         }
     },
     methods: {
         increaseLocalCounter() {
-            if(this.$store.state.count >= this.currentCosts){
+            console.log("Clicked Item!")
+            if(Number(this.$store.state.count) >= Number(this.currentCosts)){
                 this.$store.state.count = (this.$store.state.count - this.currentCosts).toFixed(2)
                 this.currentCosts = (this.currentCosts * 1.10).toFixed(2)
+                this.$store.state.counterRate++;
                 this.itemCounter++
             }
         }
     }
 })
+
+
+
 </script>
 
 

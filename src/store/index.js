@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state () {
     return {
-      count: 0
+      count: 0,
+      counterRate: 0
     }
   },
   getters: {
@@ -11,8 +12,7 @@ export default createStore({
   mutations: {
     increment(state) {
       state.count++
-    },
-    
+    }
   },
   actions: {
   },

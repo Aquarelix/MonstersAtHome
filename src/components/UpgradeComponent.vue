@@ -9,11 +9,18 @@
 import UpgradeableItem from "./UpgradeableItem.vue"
 
 export default({
-    setup() {
-        
+    data () {
+        return {
+
+        }
     },
     components: {
         UpgradeableItem
+    },
+    mounted() {
+        setInterval(() => {
+            this.$store.state.count = (Number(this.$store.state.count) + Number(this.$store.state.counterRate)).toFixed(2)
+        }, 1000)
     }
 })
 </script>
