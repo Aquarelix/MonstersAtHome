@@ -1,12 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <HomeView v-if="this.$store.state.isAuthenticated"/>
+  <LoginView v-else/>
 </template>
 
+<script>
+import LoginView from './views/LoginView.vue'
+import HomeView from './views/HomeView.vue'
+
+export default {
+  mounted() {
+
+  },
+    components: {
+    LoginView,
+    HomeView
+}
+}
+</script>
+
 <style>
+html, body, #app{
+  height: 100%;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
