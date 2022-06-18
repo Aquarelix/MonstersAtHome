@@ -1,6 +1,6 @@
 <template>
     <h1>Clicker</h1>
-    <img src="../assets/logo.png" alt="Clicker Image" @click="incrementCounter" class="clickerImage">
+    <img src="../assets/logo.png" alt="Clicker Image" class="clickerImage" @click="incrementCounter" >
 </template>
 
 <script>

@@ -52,6 +52,8 @@ export default{
             await axios.post("http://192.168.0.20:3000/auth/login", {
                 username: this.username,
                 password: this.password
+            }, {
+                withCredentials: true,
             })
             .then(() => {
                 this.$router.push("/");
