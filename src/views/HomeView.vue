@@ -24,6 +24,10 @@ export default {
     HeaderComponentVue,
     ClickerComponentVue,
     UpgradeComponentVue
+  },
+  mounted () {
+    // API call
+    // If Error 403 (Forbidden) -> router-link to /login
   }
 }
 </script>

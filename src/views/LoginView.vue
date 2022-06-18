@@ -1,10 +1,26 @@
 <template>
 <div class="wrapper">
-    <div class="login">
+    <div class="login" v-if="onLogin">
         <h1>Login</h1>
         <input type="text" id="usernameLogin" v-model="username" placeholder="Username"> 
         <br>
-        <input type="password" id="passwordLogin" placeholder="Password" v-model="password" v-on:keypress.enter="SubmitAuthentication()">
+        <input type="password" id="passwordLogin" placeholder="Password" v-model="password" v-on:keypress.enter="ValidateLogin()">
+        <div class="errorMessage" hidden></div>
+        <br>
+        <button @click="ValidateLogin"> Submit </button>
+        <br>
+        <label @click="ToggleLogin"> No Account? Register here</label>
+    </div>
+
+    <div class="register" v-else>
+        <h1>Register</h1>
+        <input type="text" id="usernameLogin" v-model="username" placeholder="Username"> 
+        <br>
+        <input type="password" id="passwordLogin" placeholder="Password" v-model="password" v-on:keypress.enter="Registeruser()">
+        <br>
+        <button @click="Registeruser"> Submit </button>
+        <br>
+        <label @click="ToggleLogin"> Already have a Acount? Login here</label>
     </div>
 </div>
 
@@ -12,24 +28,54 @@
 
 <script>
 
-const axios = require("axios")
+
+import axios from 'axios'
 
 export default{
     data () {
         return  {
             username: "",
             password: "",
+            onLogin: true
         }
     },
     methods: {
-        SubmitAuthentication() {
-            console.log(this.username + " | " + this.password)
+        ValidateLogin: async function (){
+            console.log("Validating Login")
+            await axios.post("http://192.168.0.20:3000/auth/login", {
+                username: this.username,
+                password: this.password
+            })
+            .then(response => {
+                console.log(response)
 
-            axios.post("https://192.168.0.20:3000/api/users")
-                .then(response => {
-                    console.log(response)
+                if(response.status == 200){
+                    this.$router.push("/");
                 }
-            )
+                
+
+            })
+            .catch(error => {
+            console.log("error: " + error)
+            })
+        },
+        Registeruser: async function () {
+            console.log(this.username + " | " + this.password)
+            
+            await axios.post("http://192.168.0.20:3000/auth/register", {
+                username: this.username,
+                password: this.password
+            })
+            .then(response => {
+                    console.log(response)
+                    this.$router.push("/");
+            })
+            .catch(error => {
+                console.log("error: " + error)
+            })
+        },
+        ToggleLogin() {
+            this.onLogin = !this.onLogin
         }
     }
 }
@@ -45,7 +91,7 @@ export default{
         height: 100%;
     }
 
-    .login{
+    .login, .register{
         border: 2px solid black;
         border-radius: 10px;
         max-width: 40%;

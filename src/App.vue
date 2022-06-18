@@ -1,21 +1,12 @@
 <template>
-  <HomeView v-if="this.$store.state.isAuthenticated"/>
-  <LoginView v-else/>
+  <router-view>
+
+  </router-view>
 </template>
 
 <script>
-import LoginView from './views/LoginView.vue'
-import HomeView from './views/HomeView.vue'
 
-export default {
-  mounted() {
-
-  },
-    components: {
-    LoginView,
-    HomeView
-}
-}
+export default {}
 </script>
 
 <style>
