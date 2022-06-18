@@ -15,7 +15,7 @@ import axios from "axios"
 export default({
     data () {
         return {
-            allUpgrades: [{name: "hallo"}],
+            allUpgrades: [],
         }
     },
     components: {
