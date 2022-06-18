@@ -5,8 +5,10 @@
         <input type="text" id="usernameLogin" v-model="username" placeholder="Username"> 
         <br>
         <input type="password" id="passwordLogin" placeholder="Password" v-model="password" v-on:keypress.enter="ValidateLogin()">
-        <div class="errorMessage" hidden></div>
         <br>
+        <div class="errorMessage" v-if="onError">
+            {{this.errorMessage}}
+        </div>
         <button @click="ValidateLogin"> Submit </button>
         <br>
         <label @click="ToggleLogin"> No Account? Register here</label>
@@ -18,6 +20,9 @@
         <br>
         <input type="password" id="passwordLogin" placeholder="Password" v-model="password" v-on:keypress.enter="Registeruser()">
         <br>
+        <div class="errorMessage" v-if="onError">
+            {{this.errorMessage}}
+        </div>
         <button @click="Registeruser"> Submit </button>
         <br>
         <label @click="ToggleLogin"> Already have a Acount? Login here</label>
@@ -36,7 +41,9 @@ export default{
         return  {
             username: "",
             password: "",
-            onLogin: true
+            onLogin: true,
+            onError: false,
+            errorMessage: "",
         }
     },
     methods: {
@@ -46,17 +53,13 @@ export default{
                 username: this.username,
                 password: this.password
             })
-            .then(response => {
-                console.log(response)
+            .then(() => {
+                this.$router.push("/");
 
-                if(response.status == 200){
-                    this.$router.push("/");
-                }
-                
-
-            })
+            })            
             .catch(error => {
-            console.log("error: " + error)
+                this.onError = true;
+                this.errorMessage = error.response.data.message;
             })
         },
         Registeruser: async function () {
@@ -66,12 +69,12 @@ export default{
                 username: this.username,
                 password: this.password
             })
-            .then(response => {
-                    console.log(response)
+            .then(() =>  {
                     this.$router.push("/");
             })
             .catch(error => {
-                console.log("error: " + error)
+                this.onError = true;
+                this.errorMessage = error.response.data.message;
             })
         },
         ToggleLogin() {
@@ -97,5 +100,9 @@ export default{
         max-width: 40%;
         margin: auto;
         padding: 2% 5%;
+    }
+
+    .errorMessage{
+        color: red;
     }
 </style>
