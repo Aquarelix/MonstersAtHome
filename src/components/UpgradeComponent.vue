@@ -1,7 +1,10 @@
 <template>
     <h1>Richtig am Upgraden hier</h1>
-    <UpgradeableItem name="Omi" img="logo.png" initalCost="4" ></UpgradeableItem>
-    <UpgradeableItem name="Henk" img="logo.png" initalCost="10" ></UpgradeableItem>
+
+    <div v-for="upgrade in allUpgrades" :key="upgrade">
+        <UpgradeableItem :id="upgrade.id" :name="upgrade.name" :startingCost="upgrade.startingCost" 
+        :costIncrease="upgrade.costIncrease" :counterRate="upgrade.counterRate" :image="upgrade.image"></UpgradeableItem>
+    </div>
 
 </template>
 
@@ -12,7 +15,7 @@ import axios from "axios"
 export default({
     data () {
         return {
-            allUpgrades: [],
+            allUpgrades: [{name: "hallo"}],
         }
     },
     components: {
@@ -26,10 +29,13 @@ export default({
         })
             .then(response => {
                 console.log(response.data);
+                this.allUpgrades = response.data;
             })
             .catch(err => {
-                console.log(err.response.data)
-                console.log("ErrorMessage: " + err.response.data.message)
+                if(err.response.data){
+                    console.log(err.response.data)
+                    console.log("ErrorMessage: " + err.response.data.message)
+                }
 
                 this.$router.push("/login")
             })

@@ -9,14 +9,16 @@
 <script>
 export default({
     props: {
-        img: String,
+        id: Number,
         name: String,
-        initalCost: String
+        startingCost: Number,
+        costIncrease: Number,
+        img: String,
     },
     data(){
         return {
-            imgPath: require('../assets/' + this.img), 
-            currentCosts: this.initalCost,
+            //imgPath: require('../assets/' + this.img), 
+            currentCosts: this.startingCost,
             itemCounter: 0,
             interval: null
         }
@@ -33,9 +35,6 @@ export default({
         }
     }
 })
-
-
-
 </script>
 
 
@@ -44,6 +43,8 @@ img{
     width: 10%;
 }
 .box{
-    border: 10px solid black;
+    border: 2px solid black;
+    width: 50%;
+    margin: 2% auto;
 }
 </style>
