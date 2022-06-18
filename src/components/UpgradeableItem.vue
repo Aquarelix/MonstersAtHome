@@ -1,6 +1,6 @@
 <template>
     <div class="box" @click="increaseLocalCounter">
-        <img :src="this.imgPath" alt="">
+        <img :src="this.img" alt="">
         <p> Name: {{this.name}} | Costs: {{this.currentCosts}} | Counter: {{this.itemCounter}}</p>
 
     </div>
@@ -13,15 +13,25 @@ export default({
         name: String,
         startingCost: Number,
         costIncrease: Number,
-        img: String,
+        image: String,
     },
     data(){
         return {
-            //imgPath: require('../assets/' + this.img), 
+            img: "", 
             currentCosts: this.startingCost,
             itemCounter: 0,
             interval: null
         }
+    },
+    created(){
+        //this.imgPath = '../assets/' + this.img;
+        try{
+            this.img = require('../assets/' + this.image);
+
+        }catch(error){
+            this.img = require('../assets/logo.png')
+        }
+            
     },
     methods: {
         increaseLocalCounter() {
