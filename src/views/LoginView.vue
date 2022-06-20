@@ -59,9 +59,21 @@ export default{
                 this.$router.push("/");
 
             })            
-            .catch(error => {
+            .catch(({response}) => {
+
+                var errorMessage = "";
+                if(!response)
+                    return;
+                
+                if(response.status == 599)
+                    errorMessage = "Connection error"
+
+
+                if(response.message)
+                    errorMessage = response.message;
+
                 this.onError = true;
-                this.errorMessage = error.response.data.message;
+                this.errorMessage = errorMessage;
             })
         },
         Registeruser: async function () {
@@ -70,6 +82,8 @@ export default{
             await axios.post("https://monsters-at-home-api.herokuapp.com/auth/register", {
                 username: this.username,
                 password: this.password
+            }, {
+                withCredentials: true,
             })
             .then(() =>  {
                     this.$router.push("/");
