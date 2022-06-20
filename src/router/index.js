@@ -6,17 +6,17 @@ import AboutView from "@/views/AboutView.vue"
 
 const routes = [
   {
-    path: '/',
+    path: '#/',
     name: 'home',
     component: HomeView
   },
   {
-    path: '/about',
+    path: '#/about',
     name: 'about',
     component: AboutView,
   },
   {
-    path: '/login', 
+    path: '#/login', 
     name: "login",
     component: LoginView
   }

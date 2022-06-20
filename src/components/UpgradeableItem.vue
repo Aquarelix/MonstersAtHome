@@ -24,7 +24,6 @@ export default({
         }
     },
     created(){
-        //this.imgPath = '../assets/' + this.img;
         try{
             this.img = require('../assets/' + this.image);
 
