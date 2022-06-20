@@ -24,7 +24,7 @@ export default({
     created: async function (){
         // Get all existing Upgrades
         
-        await axios.get("http://192.168.0.20:3000/api/upgrades", {
+        await axios.get("https://monsters-at-home-api.herokuapp.com/api/upgrades", {
             withCredentials: true
         })
             .then(response => {

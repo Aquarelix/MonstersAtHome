@@ -49,7 +49,7 @@ export default{
     methods: {
         ValidateLogin: async function (){
             console.log("Validating Login")
-            await axios.post("http://192.168.0.20:3000/auth/login", {
+            await axios.post("https://monsters-at-home-api.herokuapp.com/auth/login", {
                 username: this.username,
                 password: this.password
             }, {
@@ -67,7 +67,7 @@ export default{
         Registeruser: async function () {
             console.log(this.username + " | " + this.password)
             
-            await axios.post("http://192.168.0.20:3000/auth/register", {
+            await axios.post("https://monsters-at-home-api.herokuapp.com/auth/register", {
                 username: this.username,
                 password: this.password
             })
