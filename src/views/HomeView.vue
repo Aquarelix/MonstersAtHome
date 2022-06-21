@@ -34,6 +34,7 @@ export default {
     GetUserData: async function (){
       console.log("Getting User DATA!");
 
+      // Get the users data
       await axios.post(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
             username: this.$cookies.get("username")
           },{

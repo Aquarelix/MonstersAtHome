@@ -21,23 +21,23 @@ export default({
     },
     mounted() {
         setInterval(() => {
-            
             const count = Number(this.$store.state.count)
             const counterRate = Number(this.$store.state.counterRate)
             var newCount = (count + counterRate).toFixed(2)
 
             this.$store.state.count = newCount
         }, 1000)
+
+        this.loadUpgrades();
     },
     components: {
         UpgradeableItem
     },
-    created: async function (){
-        // Get all existing Upgrades
-        
-        await axios.get(this.BASE_API_URL + "/api/upgrades", {
-            withCredentials: true
-        })
+    methods: {
+        loadUpgrades: async function(){
+            await axios.get(this.BASE_API_URL + "/api/upgrades", {
+                withCredentials: true
+            })
             .then(response => {
                 console.log(response.data);
                 this.allUpgrades = response.data;
@@ -50,8 +50,9 @@ export default({
 
                 this.$router.push("/login")
             })
-
-
+        }
+    },
+    created: async function (){
         // Get User Data and replace with his values
         this.$store.state.count = 0;
         this.$store.state.counterRate = 0;
