@@ -5,7 +5,6 @@ export default createStore({
     return: {
       count: 0,
       counterRate: 0,
-      username: ""
     }
   },
   getters: {
@@ -14,9 +13,6 @@ export default createStore({
     },
     getCounterRate(state){
       return state.counterRate;
-    },
-    getUsername(state){
-      return state.username;
     }
   },
   mutations: {
