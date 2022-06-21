@@ -5,26 +5,40 @@
         <h3>Clicker Rate: {{ this.counterRate }}</h3>
     </div>
     <div class="show">
-        <h3> Username: {{this.username}}</h3>
+        <h3 @click="logoutUser"> Username: {{this.username}}</h3>
     </div>
 </template>
 
 <script>
 
 import { mapGetters } from "vuex"
+import axios from "axios"
 
 export default({
     data(){
-        return {}
+        return {
+            username: this.$cookies.get("username")
+        }
     },
     computed: {
         ...mapGetters({
             counter: 'getCounter',
             counterRate: 'getCounterRate',
-            username: 'getUsername'
         })
     },
-
+    methods: {
+        logoutUser: async function (){
+            await axios.get(process.env.VUE_APP_BASE_API_URL + "/auth/logout", {
+                withCredentials: true
+            }).then( response => {
+                console.log(response);
+                this.$router.push("/login");
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+    }
 })
 </script>
 

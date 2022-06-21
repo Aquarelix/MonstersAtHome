@@ -32,9 +32,7 @@
 </template>
 
 <script>
-
-
-import axios from 'axios'
+import axios from 'axios';
 
 export default{
     data () {
@@ -72,8 +70,7 @@ export default{
                 withCredentials: true,
             })
             .then((response) =>  {
-                console.log("Username: " + response.data.username)
-                this.$store.state.username = response.data.username;
+                console.log(response)
                 this.$router.push("/");
             })
             .catch(({response}) => {
