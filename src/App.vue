@@ -8,7 +8,11 @@
 
 export default {
   mounted(){
-    this.$router.push("/");
+    const isLoggedIn = JSON.parse(this.$cookies.get("isLoggedIn")) // convert string to bool
+    
+    // Check if user is logged in
+    if(!isLoggedIn)
+      this.$router.push("/login")
   }
 }
 </script>

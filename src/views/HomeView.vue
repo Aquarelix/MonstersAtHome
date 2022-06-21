@@ -32,12 +32,17 @@ export default {
   },
   methods: {
     GetUserData: async function (){
+      console.log("Getting User DATA!");
+
+      // Get the users data
       await axios.post(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
+            username: this.$cookies.get("username")
+          },{
               withCredentials: true
-          }).then( ({response}) => {
+          }).then( (response) => {
             console.log(response);
           }).catch( ({response}) => {
-            console.log(response.message);
+            console.log(response);
             this.$router.push("/");
           })
     }
