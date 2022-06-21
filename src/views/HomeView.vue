@@ -18,6 +18,8 @@ import HeaderComponentVue from '@/components/HeaderComponent.vue'
 import ClickerComponentVue from '@/components/ClickerComponent.vue'
 import UpgradeComponentVue from '@/components/UpgradeComponent.vue'
 
+import axios from "axios"
+
 export default {
   name: 'HomeView',
   components: {
@@ -25,10 +27,22 @@ export default {
     ClickerComponentVue,
     UpgradeComponentVue
   },
-  mounted () {
-    // API call
-    // If Error 403 (Forbidden) -> router-link to /login
+  beforeMount() {
+    this.GetUserData()
+  },
+  methods: {
+    GetUserData: async function (){
+      await axios.post(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
+              withCredentials: true
+          }).then( ({response}) => {
+            console.log(response);
+          }).catch( ({response}) => {
+            console.log(response.message);
+            this.$router.push("/");
+          })
+    }
   }
+
 }
 </script>
 

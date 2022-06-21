@@ -69,9 +69,11 @@ export default{
                 username: this.username,
                 password: this.password
             }, {
-                withCredentials: true, // Allowing Cookies
+                withCredentials: true,
             })
-            .then(() =>  {
+            .then((response) =>  {
+                console.log("Username: " + response.data.username)
+                this.$store.state.username = response.data.username;
                 this.$router.push("/");
             })
             .catch(({response}) => {
@@ -86,9 +88,10 @@ export default{
             if(response.status >= 500)
                 errorMessage = "Connection error"
 
-            if(response.message)
-                errorMessage = response.message;
+            if(response.data.message)
+                errorMessage = response.data.message;
 
+            console.log(response);
             this.onError = true;
             this.errorMessage = errorMessage;
         }

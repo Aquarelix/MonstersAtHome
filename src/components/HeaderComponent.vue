@@ -1,7 +1,12 @@
 <template>
     <h1> Monsters At Home! </h1>
-    <h3 class="clicker"> Clicker: {{ this.counter }}</h3>
-    <h3 class="clicker"> Clicker Rate: {{ this.$store.state.counterRate }} /s</h3>
+    <div class="clicker">
+        <h3> Clicker: {{ this.counter }}</h3>
+        <h3>Clicker Rate: {{ this.counterRate }}</h3>
+    </div>
+    <div class="show">
+        <h3> Username: {{this.username}}</h3>
+    </div>
 </template>
 
 <script>
@@ -14,7 +19,9 @@ export default({
     },
     computed: {
         ...mapGetters({
-            counter: 'getCounter'
+            counter: 'getCounter',
+            counterRate: 'getCounterRate',
+            username: 'getUsername'
         })
     },
 
@@ -27,7 +34,15 @@ export default({
 }
 
 .clicker{
+    width: 20%;
     text-align: left;
     padding-left: 1%;
 }
+
+.show{
+    width: 20%;
+    padding-left: 1%;
+    text-align: left;
+}
+
 </style>

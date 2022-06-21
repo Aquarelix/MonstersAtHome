@@ -12,6 +12,9 @@ export default createStore({
     getCounter(state){
       return state.count;
     },
+    getCounterRate(state){
+      return state.counterRate;
+    },
     getUsername(state){
       return state.username;
     }
