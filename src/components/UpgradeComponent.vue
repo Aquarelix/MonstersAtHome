@@ -16,8 +16,18 @@ export default({
     data () {
         return {
             allUpgrades: [],
-            BASE_API_URL: process.env.BASE_API_URL
+            BASE_API_URL: process.env.VUE_APP_BASE_API_URL
         }
+    },
+    mounted() {
+        setInterval(() => {
+            
+            const count = Number(this.$store.state.count)
+            const counterRate = Number(this.$store.state.counterRate)
+            var newCount = (count + counterRate).toFixed(2)
+
+            this.$store.state.count = newCount
+        }, 1000)
     },
     components: {
         UpgradeableItem
@@ -45,16 +55,6 @@ export default({
         // Get User Data and replace with his values
         this.$store.state.count = 0;
         this.$store.state.counterRate = 0;
-    },
-    mounted() {
-        setInterval(() => {
-            
-            const count = Number(this.$store.state.count)
-            const counterRate = Number(this.$store.state.counterRate)
-            var newCount = (count + counterRate).toFixed(2)
-
-            this.$store.state.count = newCount
-        }, 1000)
     }
 })
 </script>
