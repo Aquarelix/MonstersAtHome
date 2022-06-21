@@ -44,57 +44,53 @@ export default{
             onLogin: true,
             onError: false,
             errorMessage: "",
+            BASE_API_URL: process.env.BASE_API_URL,
         }
     },
     methods: {
         ValidateLogin: async function (){
             console.log("Validating Login")
-            await axios.post("https://monsters-at-home-api.herokuapp.com/auth/login", {
-                username: this.username,
-                password: this.password
-            }, {
-                withCredentials: true,
-            })
-            .then(() => {
-                this.$router.push("/");
-
-            })            
-            .catch(({response}) => {
-
-                var errorMessage = "";
-                if(!response)
-                    return;
-                
-                if(response.status == 599)
-                    errorMessage = "Connection error"
-
-
-                if(response.message)
-                    errorMessage = response.message;
-
-                this.onError = true;
-                this.errorMessage = errorMessage;
-            })
+            this.SendPostRequest("/auth/login");
         },
         Registeruser: async function () {
-            console.log(this.username + " | " + this.password)
-            
-            await axios.post("https://monsters-at-home-api.herokuapp.com/auth/register", {
+            console.log("Register User")
+            this.SendPostRequest("/auth/register")
+        },
+        ToggleLogin() {
+            // Toggle login bool
+            this.onLogin = !this.onLogin
+
+            // Reset all errors
+            this.errorMessage = "";
+            this.onError = false;
+        },
+        SendPostRequest: async function (endpoint){
+            await axios.post(this.BASE_API_URL + endpoint, {
                 username: this.username,
                 password: this.password
             }, {
-                withCredentials: true,
+                withCredentials: true, // Allowing Cookies
             })
             .then(() =>  {
-                    this.$router.push("/");
+                this.$router.push("/");
             })
-            .catch(error => {
-                this.onError = true;
-                this.errorMessage = error.response.data.message;
+            .catch(({response}) => {
+                this.HandleError(response);
             })
         },
-        ToggleLogin() {
-            this.onLogin = !this.onLogin
+        HandleError(response){
+            var errorMessage = "";
+            if(!response)
+                return;
+            
+            if(response.status >= 500)
+                errorMessage = "Connection error"
+
+            if(response.message)
+                errorMessage = response.message;
+
+            this.onError = true;
+            this.errorMessage = errorMessage;
         }
     }
 }
