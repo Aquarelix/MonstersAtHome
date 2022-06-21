@@ -16,6 +16,7 @@ export default({
     data () {
         return {
             allUpgrades: [],
+            BASE_API_URL: process.env.BASE_API_URL
         }
     },
     components: {
@@ -24,7 +25,7 @@ export default({
     created: async function (){
         // Get all existing Upgrades
         
-        await axios.get("https://monsters-at-home-api.herokuapp.com/api/upgrades", {
+        await axios.get(this.BASE_API_URL + "/api/upgrades", {
             withCredentials: true
         })
             .then(response => {
