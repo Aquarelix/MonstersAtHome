@@ -44,7 +44,7 @@ export default{
             onLogin: true,
             onError: false,
             errorMessage: "",
-            BASE_API_URL: process.env.BASE_API_URL,
+            BASE_API_URL: process.env.VUE_APP_BASE_API_URL,
         }
     },
     methods: {
