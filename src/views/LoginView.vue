@@ -48,11 +48,11 @@ export default{
     methods: {
         ValidateLogin: async function (){
             console.log("Validating Login")
-            this.SendPostRequest("/auth/login");
+            this.SendAuthenticationRequest("/auth/login");
         },
         Registeruser: async function () {
             console.log("Register User")
-            this.SendPostRequest("/auth/register")
+            this.SendAuthenticationRequest("/auth/register")
         },
         ToggleLogin() {
             // Toggle login bool
@@ -62,7 +62,7 @@ export default{
             this.errorMessage = "";
             this.onError = false;
         },
-        SendPostRequest: async function (endpoint){
+        SendAuthenticationRequest: async function (endpoint){
             await axios.post(this.BASE_API_URL + endpoint, {
                 username: this.username,
                 password: this.password
@@ -70,7 +70,10 @@ export default{
                 withCredentials: true,
             })
             .then((response) =>  {
+                console.log("LOGIN RESPONSE:")
                 console.log(response)
+                this.$cookies.set("isLoggedIn", true);
+                this.$cookies.set("username", response.data.username);
                 this.$router.push("/");
             })
             .catch(({response}) => {
