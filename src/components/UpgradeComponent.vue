@@ -19,7 +19,7 @@ export default({
             BASE_API_URL: process.env.VUE_APP_BASE_API_URL
         }
     },
-    mounted() {
+    created() {
         setInterval(() => {
             const count = Number(this.$store.state.count)
             const counterRate = Number(this.$store.state.counterRate)
@@ -28,13 +28,17 @@ export default({
             this.$store.state.count = newCount
         }, 1000)
 
+        // Get User Data and replace with his values
+        this.$store.state.count = 0;
+        this.$store.state.counterRate = 0;
+
         this.loadUpgrades();
     },
     components: {
         UpgradeableItem
     },
     methods: {
-        loadUpgrades: async function(){
+        async loadUpgrades(){
             await axios.get(this.BASE_API_URL + "/api/upgrades", {
                 withCredentials: true
             })
@@ -51,11 +55,6 @@ export default({
                 this.$router.push("/login")
             })
         }
-    },
-    created: async function (){
-        // Get User Data and replace with his values
-        this.$store.state.count = 0;
-        this.$store.state.counterRate = 0;
     }
 })
 </script>

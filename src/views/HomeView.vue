@@ -27,7 +27,7 @@ export default {
     ClickerComponentVue,
     UpgradeComponentVue
   },
-  beforeMount() {
+  created() {
     this.GetUserData()
   },
   methods: {
