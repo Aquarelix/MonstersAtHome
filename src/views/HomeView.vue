@@ -28,23 +28,72 @@ export default {
     UpgradeComponentVue
   },
   created() {
-    this.GetUserData()
+    this.GetUserData();
+
+    setInterval(this.SaveUserData(), 10000);
   },
   methods: {
-    GetUserData: async function (){
+    async GetUserData(){
       console.log("Getting User DATA!");
 
       // Get the users data
       await axios.post(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
-            username: this.$cookies.get("username")
-          },{
-              withCredentials: true
-          }).then( (response) => {
-            console.log(response);
-          }).catch( ({response}) => {
-            console.log(response);
-            this.$router.push("/");
-          })
+          username: this.$cookies.get("username")
+        },{
+            withCredentials: true
+        }).then( (response) => {
+          const userData = response.data;
+
+          // If userdata exists -> set counter and counterRate
+          if(userData){
+            this.$store.state.count = userData.counter;
+            this.$store.state.counterRate = userData.counterRate;
+          }
+          console.log(userData);
+        }).catch( (response) => {
+          console.log(response);
+          
+          // Set Variables
+          this.$store.state.count = 0;
+          this.$store.state.counterRate = 0;
+          
+          // if api returns forbidden -> token is missing
+          if(response.status == 403)
+            this.$router.push("/login")
+        })
+    },
+    async SaveUserData(){
+      console.log("SAVING USER DATA!")
+      const userData = {
+        username: this.$cookies.get("username"),
+        counter: this.$store.state.count,
+        counterRate: this.$store.state.counterRate,
+        upgradeBoxes: "hallo"
+      };
+
+      const allUpgrades = UpgradeComponentVue.methods.getAllUpgrades();
+      if(allUpgrades){
+        console.log("allUpgrades:")
+        console.log(allUpgrades)
+      }
+
+      if(userData){
+        console.log("UserData:")
+        console.log(userData)
+      }
+
+
+      /*
+      await axios.put(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
+        userData
+      }).then(response => {
+        console.log("SaveUserData Response")
+        console.log(response)
+      }).catch(response => {
+        console.log("ERROR Happened SaveUserData")
+        console.log(response)
+      })
+      */
     }
   }
 
