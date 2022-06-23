@@ -25,12 +25,9 @@ export default({
             const counterRate = Number(this.$store.state.counterRate)
             var newCount = (count + counterRate).toFixed(2)
 
+
             this.$store.state.count = newCount
         }, 1000)
-
-        // Get User Data and replace with his values
-        this.$store.state.count = 0;
-        this.$store.state.counterRate = 0;
 
         this.loadUpgrades();
     },
@@ -54,6 +51,9 @@ export default({
 
                 this.$router.push("/login")
             })
+        },
+        getAllUpgrades(){
+            console.log("Getting all Upgrades!")
         }
     }
 })
