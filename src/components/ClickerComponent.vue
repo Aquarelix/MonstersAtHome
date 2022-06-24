@@ -1,6 +1,9 @@
 <template>
-    <h1>Clicker</h1>
-    <img src="../assets/logo.png" alt="Clicker Image" class="clickerImage" @click="incrementCounter" >
+    <div class="clickerContainer" @click="incrementCounter">
+        <img id="clicker" src="../assets/ClickerImage.png" alt="Clicker Image" class="clickerImage">
+        <h1>Click!</h1>
+    </div>
+
 </template>
 
 <script>
@@ -10,17 +13,31 @@ export default({
         incrementCounter(){
             this.$store.commit('increment')
         }
-    }
+    },
 })
 </script>
 
 <style scoped>
-*{
-    background-color: bisque;
-    border: 4px dotted black;
+
+.clickerContainer {
+    background-color: black;
+    width: 80%;
+    border-radius: 1em;
+    transition: width 0.01s;
+    transition: border-radius 0.1s;
+    box-shadow: 0px 10px 10px black;
 }
+
 .clickerImage{
-    border: 2px solid black;
-    border-radius: 1rem;
+    width: 100%;
+    border-radius: 1em;
+    user-select: none;
+}
+
+h1 {
+    margin: 0;
+    height: 0%;
+    color: white;
+    user-select: none;
 }
 </style>
