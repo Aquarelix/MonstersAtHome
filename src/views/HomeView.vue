@@ -1,13 +1,11 @@
 <template>
   <div class="home">
       <HeaderComponentVue />
-      
       <div class="clicker">
         <ClickerComponentVue />
-      </div>
-
-      <div class="upgrade">
-        <UpgradeComponentVue />
+        <div class="upgrade">
+          <UpgradeComponentVue />
+        </div>
       </div>
   </div>
 </template>
@@ -21,30 +19,35 @@ import UpgradeComponentVue from '@/components/UpgradeComponent.vue'
 import axios from "axios"
 
 export default {
-  name: 'HomeView',
+  data(){
+    return{
+      BASE_URL: process.env.VUE_APP_BASE_API_URL,
+    }
+  },
   components: {
     HeaderComponentVue,
     ClickerComponentVue,
     UpgradeComponentVue
   },
   created() {
-    this.GetUserData()
+  },
+  mounted(){
+    setInterval(this.SaveUserData, 30000);
   },
   methods: {
-    GetUserData: async function (){
-      console.log("Getting User DATA!");
+    SaveUserData(){
+      const currentCounter = this.$store.state.count
+      const currentRate = this.$store.state.counterRate
+      const upgradeData = UpgradeComponentVue.methods.getAllUpgradeData()
 
-      // Get the users data
-      await axios.post(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
-            username: this.$cookies.get("username")
-          },{
-              withCredentials: true
-          }).then( (response) => {
-            console.log(response);
-          }).catch( ({response}) => {
-            console.log(response);
-            this.$router.push("/");
-          })
+      axios.put(this.BASE_URL + "/api/userSave", {
+        username: this.$cookies.get("username"),
+        counter: Number(currentCounter),
+        counterRate: Number(currentRate),
+        upgradeBoxes: JSON.stringify(upgradeData)
+      }, {
+        withCredentials: true
+      })
     }
   }
 
@@ -53,13 +56,19 @@ export default {
 
 <!-- Scoped: you will only style the component-->
 <style scoped>
-  .clicker{
-    width: 40%;
-    float: left;
-  }
 
-  .upgrade{
-    width: 60%;
-    float: left;
-  }
+.clicker{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.upgrade {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 </style>

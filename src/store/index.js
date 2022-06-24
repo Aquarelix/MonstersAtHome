@@ -5,19 +5,41 @@ export default createStore({
     return: {
       count: 0,
       counterRate: 0,
+      clicks: 0,
+      monstersSpent: 0,
+      isLoaded: false,
     }
   },
   getters: {
     getCounter(state){
       return state.count;
     },
+    getIntegerCounter(state){
+      return parseInt(state.count);
+    },
     getCounterRate(state){
       return state.counterRate;
-    }
+    },
+    getIntegerCounterRate(state){
+      return parseInt(state.counterRate);
+    },
+    getIntegerClicks(state){
+      return parseInt(state.clicks);
+    },
+    getIntegerMonstersSpent(state){
+      return parseInt(state.monstersSpent);
+    },
   },
   mutations: {
     increment(state) {
-      state.count = (Number(state.count) + 1).toFixed(2);
+      state.count++;
+      state.clicks++;
+    },
+    decreaseCounter(state, counterDecreaseValue) {
+      state.count = state.count - counterDecreaseValue;
+    },
+    increaseCounterRate(state, counterRateIncrease) {
+      state.counterRate += counterRateIncrease;
     }
   },
   actions: {
