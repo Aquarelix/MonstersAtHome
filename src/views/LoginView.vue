@@ -1,31 +1,28 @@
 <template>
 <div class="wrapper">
+    <div class="header">
+        <img src="../assets/MonstersAtHomeBanner.png" alt="MonstersAtHomeBanner" class="banner">
+    </div>
     <div class="login" v-if="onLogin">
-        <h1>Login</h1>
+        <h1 id="loginTitle">Login</h1>
         <input type="text" id="usernameLogin" v-model="username" placeholder="Username"> 
-        <br>
         <input type="password" id="passwordLogin" placeholder="Password" v-model="password" v-on:keypress.enter="ValidateLogin()">
-        <br>
         <div class="errorMessage" v-if="onError">
             {{this.errorMessage}}
         </div>
-        <button @click="ValidateLogin"> Submit </button>
-        <br>
-        <label @click="ToggleLogin"> No Account? Register here</label>
+        <button class="submitButton" @click="ValidateLogin"> Submit </button>
+        <h3 class="registerHere" @click="ToggleLogin"> Register here!</h3>
     </div>
 
     <div class="register" v-else>
         <h1>Register</h1>
         <input type="text" id="usernameLogin" v-model="username" placeholder="Username"> 
-        <br>
         <input type="password" id="passwordLogin" placeholder="Password" v-model="password" v-on:keypress.enter="Registeruser()">
-        <br>
         <div class="errorMessage" v-if="onError">
             {{this.errorMessage}}
         </div>
-        <button @click="Registeruser"> Submit </button>
-        <br>
-        <label @click="ToggleLogin"> Already have a Acount? Login here</label>
+        <button class="submitButton" @click="Registeruser"> Submit </button>
+        <h3 class="registerHere" @click="ToggleLogin"> Login here!</h3>
     </div>
 </div>
 
@@ -97,24 +94,100 @@ export default{
 </script>
 
 <style scoped>
-    *{
-        margin: 10px auto;
+* {
+    font-size: large;
+}
+
+h1 {
+    padding-top: 1em;
+    color: white;
+    font-size: xx-large;
+}
+
+.wrapper{
+    color: white;
+}
+
+.banner {
+    width: 100%;
+}
+
+.wrapper * {
+    margin: auto;
+    text-align: center;
+    max-width: 80%;
+    min-width: 80%;
+}
+
+.login, .register{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 2em;
+}
+
+#usernameLogin, #passwordLogin {
+    font-family: Alagard;
+    margin-top: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: black;
+    border-radius: 1em;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #eee;
+    max-width: 50%;
+}
+
+.submitButton {
+    font-family: Alagard;
+    color: black;
+    margin-top: 3em;
+    padding-top: 1em;
+    border-radius: 1em;
+    padding-bottom: 1em;
+
+    border: 0;
+    background-color: white;
+    max-width: 50%;
+}
+
+.submitButton:hover {
+    background-color: black;
+    color: white;
+}
+
+.submitButton:active {
+    box-shadow: 0em 0em 0.1em white;
+}
+
+.registerHere {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 2em;
+    margin-top: 1em;
+}
+
+.registerHere:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.errorMessage{
+    margin-top: 1em;
+    color: red;
+}
+
+@media only screen and (max-width: 600px) {
+    #usernameLogin, #passwordLogin {
+        max-width: 80%;
+        min-width: 80%;
     }
 
-    .wrapper{
-        display: flex;
-        height: 100%;
+    .submitButton
+    {
+        max-width: 50%;
+        min-width: 50%;
     }
-
-    .login, .register{
-        border: 2px solid black;
-        border-radius: 10px;
-        max-width: 40%;
-        margin: auto;
-        padding: 2% 5%;
-    }
-
-    .errorMessage{
-        color: red;
-    }
+}
 </style>
