@@ -23,7 +23,8 @@ import axios from "axios"
 export default {
   data(){
     return{
-      BASE_URL: process.env.VUE_APP_BASE_API_URL
+      BASE_URL: process.env.VUE_APP_BASE_API_URL,
+      SAVE_INTERVAL: process.env.VUE_APP_SAVE_INTERVAL,
     }
   },
   components: {
@@ -34,12 +35,12 @@ export default {
   created() {
   },
   mounted(){
-    setInterval(this.SaveUserData, 30000);
+    setInterval(this.SaveUserData, this.SAVE_INTERVAL);
   },
   methods: {
     SaveUserData(){
-      const currentCounter = this.$store.state.count;
-      const currentRate = this.$store.state.counterRate;
+      const currentCounter = this.$store.state.count
+      const currentRate = this.$store.state.counterRate
       const upgradeData = UpgradeComponentVue.methods.getAllUpgradeData()
 
       axios.put(this.BASE_URL + "/api/userSave", {
@@ -49,14 +50,6 @@ export default {
         upgradeBoxes: JSON.stringify(upgradeData)
       }, {
         withCredentials: true
-      })
-      .then(response => {
-        console.log("UPDATE RESPONSE")
-        console.log(response)
-      })
-      .catch(response => {
-        console.log("UPDATE ERROR")
-        console.log(response)
       })
     }
   }

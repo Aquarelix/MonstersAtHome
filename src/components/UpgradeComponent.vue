@@ -2,8 +2,11 @@
     <h1>Richtig am Upgraden hier</h1>
 
     <div v-for="(upgrade) in this.allUpgrades" :key="upgrade" >
-        <UpgradeableItem class="upgrade" :upgradeId="upgrade.id" :name="upgrade.name" :startingCost="upgrade.startingCost" 
-        :costIncrease="upgrade.costIncrease" :itemCount="upgrade.itemCount" :counterRate="upgrade.counterRate" :image="upgrade.image"></UpgradeableItem>
+        <UpgradeableItem class="upgrade" 
+            :upgradeId="upgrade.id" :name="upgrade.name" :startingCost="upgrade.startingCost" 
+            :costIncrease="upgrade.costIncrease" :itemCount="upgrade.itemCount" 
+            :counterRate="upgrade.counterRate" :image="upgrade.image">
+        </UpgradeableItem>
     </div>
 
 </template>
@@ -20,6 +23,7 @@ export default({
         }
     },
     async created() {
+        // Load all Upgrades
         this.allUpgradesData = await this.getAllUpgrades();
 
         setInterval(() => {
@@ -29,8 +33,6 @@ export default({
 
             this.$store.state.count = newCount
         }, 1000)
-
-
     },
     computed: {
         allUpgrades() {
@@ -41,20 +43,35 @@ export default({
         UpgradeableItem
     },
     methods: {
-        getAllUpgradeData(){      
-            let allUpgrades = document.getElementsByClassName("hiddenInfos");
-            let allUpgradesJSON = [];
-            
-            if(allUpgrades.length < 0)
-                return;
+        async getAllUpgrades(){
+            console.log("Getting all Upgrades: ")
+            const userSave = await this.GetUserData();
+            const upgrades = await this.loadUpgrades();
 
-            for(let i = 0; i < allUpgrades.length; i++){
-                console.log(allUpgrades[i])
-                if(allUpgrades[i])
-                    allUpgradesJSON.push(JSON.parse(allUpgrades[i].innerHTML));
+            // Upgrades are missing -> no data
+            if(!upgrades)
+                return undefined;
+
+            // User has no save -> no need to change
+            if(!userSave)
+                return upgrades;
+
+            for(let i = 0; i < upgrades.length; i++){
+                for(let j = 0; j < userSave.length; j++){
+                    
+                    // userSave doesn't exist
+                    if(!userSave[i])
+                        continue;
+                    
+                    // Only change the Data if both upgrades are the same
+                    if(upgrades[i].id === userSave[i].id){
+                        upgrades[i].startingCosts = userSave[i].currentCosts;
+                        upgrades[i].itemCount = userSave[i].itemCounter;
+                    }
+                }
             }
 
-            return allUpgradesJSON;
+            return upgrades;
         },
         async loadUpgrades(){
             return await axios.get(this.BASE_API_URL + "/api/upgrades", {
@@ -62,7 +79,6 @@ export default({
             })
             .then(response => {
                 console.log(response.data);
-                //this.allUpgrades = response.data;
                 return response.data
             })
             .catch(err => {
@@ -88,56 +104,44 @@ export default({
 
                 // If userdata exists -> set counter and counterRate
                 if(userData){
+                    // Set the User data
                     this.$store.state.count = userData.counter;
                     this.$store.state.counterRate = userData.counterRate;
 
+                    // Return the UpgradeBoxes
                     if(userData.upgradeBoxes){
-                        console.log(userData.upgradeBoxes)
-                        console.log(JSON.parse(userData.upgradeBoxes))
                         return JSON.parse(userData.upgradeBoxes);
                     }
-                    else{
-                        this.loadUpgrades();
-                    }
-
                 }
-                console.log(userData);
                 })
                 .catch( (response) => {
-                console.log(response);
-                
-                // Set Variables
-                this.$store.state.count = 0;
-                this.$store.state.counterRate = 0;
-                
-                // if api returns forbidden -> token is missing
-                if(response.status == 403)
-                    this.$router.push("/login")
+                    // Set User variables
+                    this.$store.state.count = 0;
+                    this.$store.state.counterRate = 0;
+                    
+                    // if api returns forbidden -> wrong token
+                    if(response.status == 403)
+                        this.$router.push("/login")
                 })
         },
-        async getAllUpgrades(){
-            console.log("Getting all Upgrades: ")
-            const userSave = await this.GetUserData();
-            const upgrades = await this.loadUpgrades();
+        getAllUpgradeData(){      
+            // Get every info from the HTML Document
+            let allUpgrades = document.getElementsByClassName("hiddenInfos");
+            let allUpgradesJSON = [];
             
-            console.log(userSave)
-            console.log(upgrades)
+            if(allUpgrades.length < 0)
+                return;
 
-            for(let i = 0; i < upgrades.length; i++){
-                for(let j = 0; j < userSave.length; j++){
-                    if(!userSave[i])
-                        continue;
-
-                    if(upgrades[i].id === userSave[i].id){
-                        console.log("SAME ID: " + i)
-                        upgrades[i].startingCosts = userSave[i].currentCosts;
-                        upgrades[i].itemCount = userSave[i].itemCounter;
-                    }
-                }
+            // Make a 
+            for(let i = 0; i < allUpgrades.length; i++){
+                if(allUpgrades[i])
+                    allUpgradesJSON.push(JSON.parse(allUpgrades[i].innerHTML));
             }
 
-            return upgrades;
-        }
+            return allUpgradesJSON;
+        },
+
+
 
     }
 })
