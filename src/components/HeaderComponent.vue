@@ -1,21 +1,21 @@
 <template>
     <div class="header">
         <img src="../assets/MonstersAtHomeBanner.png" alt="MonstersAtHomeBanner" class="banner">
+        <nav>
+            <h1>Home</h1>
+            <h1 @click="goToProfile">Profile</h1>
+        </nav>
     </div>
     <div class="values" >
-        <h3 class="monsterCounter" id="Monsters">Monsters: {{ this.counter }}</h3>
-        <h3 class="monstersPerSecond" >Monsters per Second: {{ this.counterRate }}</h3>
+        <img src="../assets/SmallMonster.png" class="smallMonster">
+        <h3 class="monsterCounter" id="Monsters">You have {{ this.counter }} Monsters</h3>
+        <h3 class="monstersPerSecond" > and gain {{ this.counterRate }} per second</h3>
     </div>
-    <div class="logout" >
-        <button @click="logoutUser"> Logout: {{this.username}}</button>
-    </div>
-
 </template>
 
 <script>
 
 import { mapGetters } from "vuex"
-import axios from "axios"
 
 export default({
     data(){
@@ -30,17 +30,6 @@ export default({
         })
     },
     methods: {
-        logoutUser: async function (){
-            await axios.get(process.env.VUE_APP_BASE_API_URL + "/auth/logout", {
-                withCredentials: true
-            }).then( response => {
-                console.log(response);
-                this.$router.push("/login");
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        },
         goToProfile() {
             this.$router.push("/profile");
         }
@@ -49,29 +38,44 @@ export default({
 </script>
 
 <style scoped>
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-.header * {
+.banner {
+    width: 50%;
+}
+
+nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.0);
+    flex-direction: row;
     padding: 0;
+    margin: 0;
+    background-color: #ebede9;
+    user-select: none;
     width: 100%;
 }
-img {
+
+h1 {
+    margin: 0.2em;
 }
 
-button {
-    color: black;
-    font-size: large;
-    background-color: white;
-    text-decoration: none;
-    border: 0;
-    border-radius: 1em;
+nav * {
     padding: 1em;
-    flex-direction: row;
+    color: #172038;
 }
+
+nav *:hover {
+    background-color: #172038;
+    color: #ebede9;
+    border-radius: 1em;
+}
+
 
 .values {
     width: 100%;
@@ -81,22 +85,24 @@ button {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     top: 0;
     background-color: black;
-    border-radius: 1em;
-    font-size: x-large;
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
+.smallMonster {
+    padding: 0;
+    margin: 0;
+    width: 1em;
+
+}
+
 .values * {
     padding: 0.2em;
     margin: 0.1em;
-}
-
-.monsterCounter {
 }
 
 .monstersPerSecond {

@@ -5,6 +5,8 @@ export default createStore({
     return: {
       count: 0,
       counterRate: 0,
+      clicks: 0,
+      monstersSpent: 0,
     }
   },
   getters: {
@@ -20,15 +22,20 @@ export default createStore({
     getIntegerCounterRate(state){
       return parseInt(state.counterRate);
     },
+    getIntegerClicks(state){
+      return parseInt(state.clicks);
+    },
+    getIntegerMonstersSpent(state){
+      return parseInt(state.monstersSpent);
+    },
   },
   mutations: {
     increment(state) {
       state.count++;
+      state.clicks++;
     },
     decreaseCounter(state, counterDecreaseValue) {
-      console.log(state.count)
       state.count = state.count - counterDecreaseValue;
-      console.log(" - " + counterDecreaseValue + " = " + state.count)
     },
     increaseCounterRate(state, counterRateIncrease) {
       state.counterRate += counterRateIncrease;
