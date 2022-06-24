@@ -1,5 +1,5 @@
 <template>
-    <div v-for="(upgrade) in this.allUpgrades" :key="upgrade" >
+    <div v-for="(upgrade) in this.allUpgrades" :key="upgrade" class="upgrades">
         <UpgradeableItem class="upgrade" 
             :upgradeId="upgrade.id" :name="upgrade.name" :startingCost="upgrade.startingCost" 
             :costIncrease="upgrade.costIncrease" :itemCount="upgrade.itemCount" 
@@ -16,18 +16,22 @@ export default({
     data () {
         return {
             allUpgradesData: [],
-            BASE_API_URL: process.env.VUE_APP_BASE_API_URL
+            BASE_API_URL: process.env.VUE_APP_BASE_API_URL,
+        }
+    },
+    mounted() {
+        if (this.$store.state.monsterIntervall == null)
+        {
+            this.$store.state.monsterIntervall = setInterval(() => {
+                const count = Number(this.$store.state.count)
+                const counterRate = Number(this.$store.state.counterRate)
+                this.$store.state.count = count + counterRate
+            }, 1000)
         }
     },
     async created() {
         // Load all Upgrades
         this.allUpgradesData = await this.getAllUpgrades();
-
-        setInterval(() => {
-            const count = Number(this.$store.state.count)
-            const counterRate = Number(this.$store.state.counterRate)
-            this.$store.state.count = count + counterRate
-        }, 1000)
     },
     computed: {
         allUpgrades() {
@@ -144,14 +148,11 @@ export default({
 
 
 <style scoped>
-.flexBox {
-    width: 400px;
-    height: 400px;
-    margin: 0.5em;
-    user-select: none;
-}
 
-.flexBoxItem:hover {
-    margin-top: 2em;
+.upgrades {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: center;
 }
 </style>
