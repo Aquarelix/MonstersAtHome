@@ -51,9 +51,6 @@ export default {
 
 <!-- Scoped: you will only style the component-->
 <style scoped>
-.home {
-
-}
 
 .clicker{
   display: flex;

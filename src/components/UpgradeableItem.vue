@@ -125,7 +125,6 @@ export default({
     padding-bottom: 1em;
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
-    height: 100%;
 }
 
 .monsterValues * {
