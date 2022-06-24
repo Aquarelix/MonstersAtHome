@@ -1,13 +1,11 @@
 <template>
   <div class="home">
       <HeaderComponentVue />
-      
       <div class="clicker">
         <ClickerComponentVue />
-      </div>
-
-      <div class="upgrade">
-        <UpgradeComponentVue />
+        <div class="upgrade">
+          <UpgradeComponentVue />
+        </div>
       </div>
   </div>
 </template>
@@ -45,7 +43,7 @@ export default {
             console.log(response);
             this.$router.push("/");
           })
-    }
+      }
   }
 
 }
@@ -53,13 +51,22 @@ export default {
 
 <!-- Scoped: you will only style the component-->
 <style scoped>
-  .clicker{
-    width: 40%;
-    float: left;
-  }
+.home {
 
-  .upgrade{
-    width: 60%;
-    float: left;
-  }
+}
+
+.clicker{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.upgrade {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 </style>
