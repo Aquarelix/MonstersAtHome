@@ -8,6 +8,7 @@ export default createStore({
       clicks: 0,
       monstersSpent: 0,
       isLoaded: false,
+      monsterIntervall: null,
     }
   },
   getters: {
