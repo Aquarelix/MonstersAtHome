@@ -19,31 +19,36 @@ import UpgradeComponentVue from '@/components/UpgradeComponent.vue'
 import axios from "axios"
 
 export default {
-  name: 'HomeView',
+  data(){
+    return{
+      BASE_URL: process.env.VUE_APP_BASE_API_URL,
+    }
+  },
   components: {
     HeaderComponentVue,
     ClickerComponentVue,
     UpgradeComponentVue
   },
-  beforeMount() {
-    this.GetUserData()
+  created() {
+  },
+  mounted(){
+    setInterval(this.SaveUserData, 30000);
   },
   methods: {
-    GetUserData: async function (){
-      console.log("Getting User DATA!");
+    SaveUserData(){
+      const currentCounter = this.$store.state.count
+      const currentRate = this.$store.state.counterRate
+      const upgradeData = UpgradeComponentVue.methods.getAllUpgradeData()
 
-      // Get the users data
-      await axios.post(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
-            username: this.$cookies.get("username")
-          },{
-              withCredentials: true
-          }).then( (response) => {
-            console.log(response);
-          }).catch( ({response}) => {
-            console.log(response);
-            this.$router.push("/");
-          })
-      }
+      axios.put(this.BASE_URL + "/api/userSave", {
+        username: this.$cookies.get("username"),
+        counter: Number(currentCounter),
+        counterRate: Number(currentRate),
+        upgradeBoxes: JSON.stringify(upgradeData)
+      }, {
+        withCredentials: true
+      })
+    }
   }
 
 }

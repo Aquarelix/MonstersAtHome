@@ -8,6 +8,7 @@
             <div class="notEnoughMoney" v-if="onNotEnoughMoney">
                 <span>No enough Monsters!</span>
             </div>
+            <p hidden class="hiddenInfos">{ "id": {{this.upgradeId}}, "itemCounter": {{this.itemCounter}}, "currentCosts": {{this.currentCosts}}}</p>
         </div>
     </div>
 </template>
@@ -15,10 +16,11 @@
 <script>
 export default({
     props: {
-        id: Number,
+        upgradeId: Number,
         name: String,
         startingCost: Number,
         costIncrease: Number,
+        itemCount: Number,
         counterRate: Number,
         image: String,
     },
@@ -27,8 +29,8 @@ export default({
             isUnlocked: false,
             img: "", 
             currentCosts: this.startingCost,
+            itemCounter: this.itemCount,
             shownCurrentCost : 0,
-            itemCounter: 0,
             interval: null,
             onNotEnoughMoney: false,
         }
@@ -44,6 +46,9 @@ export default({
         this.shownCurrentCost = this.startingCost
     },
     created(){
+        if(!this.itemCount)
+            this.itemCounter = 0
+            
         try{
             this.img = require('../assets/' + this.image);
 
