@@ -18,16 +18,34 @@ export default {
 </script>
 
 <style>
+
 html, body, #app{
+  background-image: url("../src/assets/SiteBG.gif");
+  background-size: cover;
+  margin: 0em;
+  padding: 0em;
   height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: white;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Alagard;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
+}
+
+
+@font-face {
+  font-family: "PixelFont";
+  src:local("PixelFont"), url("./assets/fonts/PixelFont.ttf") format("truetype")
+}
+
+@font-face {
+  font-family: "Alagard";
+  src:local("Alagard"), url("./assets/fonts/Alagard.ttf") format("truetype")
 }
 
 nav {

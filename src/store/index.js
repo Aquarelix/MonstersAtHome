@@ -12,16 +12,27 @@ export default createStore({
     getCounter(state){
       return state.count;
     },
+    getIntegerCounter(state){
+      return parseInt(state.count);
+    },
     getCounterRate(state){
       return state.counterRate;
     },
-    getIsLoaded(state){
-      return state.isLoaded;
-    }
+    getIntegerCounterRate(state){
+      return parseInt(state.counterRate);
+    },
   },
   mutations: {
     increment(state) {
-      state.count = (Number(state.count) + 1).toFixed(2);
+      state.count++;
+    },
+    decreaseCounter(state, counterDecreaseValue) {
+      console.log(state.count)
+      state.count = state.count - counterDecreaseValue;
+      console.log(" - " + counterDecreaseValue + " = " + state.count)
+    },
+    increaseCounterRate(state, counterRateIncrease) {
+      state.counterRate += counterRateIncrease;
     }
   },
   actions: {

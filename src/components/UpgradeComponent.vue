@@ -8,7 +8,6 @@
             :counterRate="upgrade.counterRate" :image="upgrade.image">
         </UpgradeableItem>
     </div>
-
 </template>
 
 <script>
@@ -29,9 +28,7 @@ export default({
         setInterval(() => {
             const count = Number(this.$store.state.count)
             const counterRate = Number(this.$store.state.counterRate)
-            var newCount = (count + counterRate).toFixed(2)
-
-            this.$store.state.count = newCount
+            this.$store.state.count = count + counterRate
         }, 1000)
     },
     computed: {
@@ -149,8 +146,14 @@ export default({
 
 
 <style scoped>
+.flexBox {
+    width: 400px;
+    height: 400px;
+    margin: 0.5em;
+    user-select: none;
+}
 
-* {
-    border: 5px solid pink;
+.flexBoxItem:hover {
+    margin-top: 2em;
 }
 </style>
