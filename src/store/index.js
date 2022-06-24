@@ -7,7 +7,8 @@ export default createStore({
       counterRate: 0,
       clicks: 0,
       monstersSpent: 0,
-      isLoaded: false,
+      startingTime: new Date(),
+      userSaveInterval: null,
       monsterIntervall: null,
     }
   },
@@ -30,6 +31,9 @@ export default createStore({
     getIntegerMonstersSpent(state){
       return parseInt(state.monstersSpent);
     },
+    getStartingTime(state){
+      return state.startingTime;
+    }
   },
   mutations: {
     increment(state) {

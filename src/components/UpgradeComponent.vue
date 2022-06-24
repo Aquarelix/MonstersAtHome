@@ -64,12 +64,11 @@ export default({
                     
                     // Only change the Data if both upgrades are the same
                     if(upgrades[i].id === userSave[i].id){
-                        upgrades[i].startingCosts = userSave[i].currentCosts;
+                        upgrades[i].startingCost = userSave[i].currentCosts;
                         upgrades[i].itemCount = userSave[i].itemCounter;
                     }
                 }
             }
-
             return upgrades;
         },
         async loadUpgrades(){
@@ -77,7 +76,6 @@ export default({
                 withCredentials: true
             })
             .then(response => {
-                console.log(response.data);
                 return response.data
             })
             .catch(err => {

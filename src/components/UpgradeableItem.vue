@@ -42,7 +42,7 @@ export default({
         }, 1000)
 
         // Set the Cost for a mob to show
-        this.shownCurrentCost = this.startingCost
+        this.shownCurrentCost = parseInt(this.startingCost)
     },
     created(){
         if(!this.itemCount)
@@ -65,7 +65,6 @@ export default({
             }
         },
         increaseLocalCounter() {
-
             // Can the Monster be bought?
             if(Number(this.$store.state.count) >= Number(this.currentCosts)){
                 // Increase Cost, Put it in Show, Decrease the Monster counter, Increase monsters per second
