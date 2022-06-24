@@ -1,6 +1,4 @@
 <template>
-    <h1>Richtig am Upgraden hier</h1>
-
     <div v-for="(upgrade) in this.allUpgrades" :key="upgrade" >
         <UpgradeableItem class="upgrade" 
             :upgradeId="upgrade.id" :name="upgrade.name" :startingCost="upgrade.startingCost" 
