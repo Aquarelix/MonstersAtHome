@@ -36,14 +36,13 @@ export default({
         }
     },
     beforeMount() {
-
         // Set the Intervall to check if a mob is unlocked
         this.invervall = setInterval(() => {
             this.unlockCheck();
         }, 1000)
 
         // Set the Cost for a mob to show
-        this.shownCurrentCost = this.startingCost
+        this.shownCurrentCost = parseInt(this.startingCost)
     },
     created(){
         if(!this.itemCount)
@@ -66,11 +65,8 @@ export default({
             }
         },
         increaseLocalCounter() {
-
             // Can the Monster be bought?
-            console.log(Number(this.$store.state.count) + " >= " + Number(this.currentCosts))
             if(Number(this.$store.state.count) >= Number(this.currentCosts)){
-                console.log("yes")
                 // Increase Cost, Put it in Show, Decrease the Monster counter, Increase monsters per second
                 this.$store.commit('decreaseCounter', this.currentCosts)
                 this.currentCosts = Number((this.currentCosts * (1 + (this.costIncrease / 100.0))))
