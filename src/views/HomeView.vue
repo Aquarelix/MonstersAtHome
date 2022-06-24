@@ -24,7 +24,6 @@ export default {
   data(){
     return{
       BASE_URL: process.env.VUE_APP_BASE_API_URL,
-      SAVE_INTERVAL: process.env.VUE_APP_SAVE_INTERVAL,
     }
   },
   components: {
@@ -35,7 +34,7 @@ export default {
   created() {
   },
   mounted(){
-    setInterval(this.SaveUserData, this.SAVE_INTERVAL);
+    setInterval(this.SaveUserData, 30000);
   },
   methods: {
     SaveUserData(){
