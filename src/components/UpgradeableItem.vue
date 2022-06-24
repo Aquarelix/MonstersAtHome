@@ -2,28 +2,32 @@
     <div class="box" @click="increaseLocalCounter">
         <img :src="this.img" alt="">
         <p> Name: {{this.name}} | Costs: {{this.currentCosts}} | Counter: {{this.itemCounter}}</p>
-
+        <p hidden class="hiddenInfos">{ "id": {{this.upgradeId}}, "itemCounter": {{this.itemCounter}}, "currentCosts": {{this.currentCosts}}}</p>
     </div>
 </template>
 
 <script>
 export default({
     props: {
-        id: Number,
+        upgradeId: Number,
         name: String,
         startingCost: Number,
         costIncrease: Number,
+        itemCount: Number,
         image: String,
     },
     data(){
         return {
             img: "", 
             currentCosts: this.startingCost,
-            itemCounter: 0,
+            itemCounter: this.itemCount,
             interval: null
         }
     },
     created(){
+        if(!this.itemCount)
+            this.itemCounter = 0
+            
         try{
             this.img = require('../assets/' + this.image);
 

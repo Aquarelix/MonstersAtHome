@@ -5,6 +5,7 @@ export default createStore({
     return: {
       count: 0,
       counterRate: 0,
+      isLoaded: false,
     }
   },
   getters: {
@@ -13,6 +14,9 @@ export default createStore({
     },
     getCounterRate(state){
       return state.counterRate;
+    },
+    getIsLoaded(state){
+      return state.isLoaded;
     }
   },
   mutations: {

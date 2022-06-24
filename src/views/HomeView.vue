@@ -21,79 +21,43 @@ import UpgradeComponentVue from '@/components/UpgradeComponent.vue'
 import axios from "axios"
 
 export default {
-  name: 'HomeView',
+  data(){
+    return{
+      BASE_URL: process.env.VUE_APP_BASE_API_URL
+    }
+  },
   components: {
     HeaderComponentVue,
     ClickerComponentVue,
     UpgradeComponentVue
   },
   created() {
-    this.GetUserData();
-
-    setInterval(this.SaveUserData(), 10000);
+  },
+  mounted(){
+    setInterval(this.SaveUserData, 30000);
   },
   methods: {
-    async GetUserData(){
-      console.log("Getting User DATA!");
+    SaveUserData(){
+      const currentCounter = this.$store.state.count;
+      const currentRate = this.$store.state.counterRate;
+      const upgradeData = UpgradeComponentVue.methods.getAllUpgradeData()
 
-      // Get the users data
-      await axios.post(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
-          username: this.$cookies.get("username")
-        },{
-            withCredentials: true
-        }).then( (response) => {
-          const userData = response.data;
-
-          // If userdata exists -> set counter and counterRate
-          if(userData){
-            this.$store.state.count = userData.counter;
-            this.$store.state.counterRate = userData.counterRate;
-          }
-          console.log(userData);
-        }).catch( (response) => {
-          console.log(response);
-          
-          // Set Variables
-          this.$store.state.count = 0;
-          this.$store.state.counterRate = 0;
-          
-          // if api returns forbidden -> token is missing
-          if(response.status == 403)
-            this.$router.push("/login")
-        })
-    },
-    async SaveUserData(){
-      console.log("SAVING USER DATA!")
-      const userData = {
+      axios.put(this.BASE_URL + "/api/userSave", {
         username: this.$cookies.get("username"),
-        counter: this.$store.state.count,
-        counterRate: this.$store.state.counterRate,
-        upgradeBoxes: "hallo"
-      };
-
-      const allUpgrades = UpgradeComponentVue.methods.getAllUpgrades();
-      if(allUpgrades){
-        console.log("allUpgrades:")
-        console.log(allUpgrades)
-      }
-
-      if(userData){
-        console.log("UserData:")
-        console.log(userData)
-      }
-
-
-      /*
-      await axios.put(process.env.VUE_APP_BASE_API_URL + "/api/userSave", {
-        userData
-      }).then(response => {
-        console.log("SaveUserData Response")
-        console.log(response)
-      }).catch(response => {
-        console.log("ERROR Happened SaveUserData")
+        counter: Number(currentCounter),
+        counterRate: Number(currentRate),
+        upgradeBoxes: JSON.stringify(upgradeData)
+      }, {
+        withCredentials: true
+      })
+      .then(response => {
+        console.log("UPDATE RESPONSE")
         console.log(response)
       })
-      */
+      .catch(response => {
+        console.log("UPDATE ERROR")
+        console.log(response)
+      })
     }
   }
 
