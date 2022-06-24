@@ -37,7 +37,7 @@ export default({
     },
     beforeMount() {
         // Set the Intervall to check if a mob is unlocked
-        this.invervall = setInterval(() => {
+        this.inverval = setInterval(() => {
             this.unlockCheck();
         }, 1000)
 
@@ -87,37 +87,32 @@ export default({
 
 .monsterImage {
     margin-top: 2.5em;
-    height: 50%;
+    height: 45%;
+}
+
+.itemBox:active .monsterImage {
+    height: 40%;
+    padding-top: 5%;
 }
 
 .itemBox {
     background-image: url("../assets/GridBG.png");
     background-size: cover;
-    width: 100%;
-    height: 100%;
-    margin-top: 0;
+    width: 400px;
+    height: 400px;
+    margin: 1em;
     border-radius: 1em;
     background-color: black;
-    transition: height 0.3s, width 0.3s, margin-left 0.3s, margin-top 0.3s, border-radius 0.3s, background-color 0.3s;
+    transition: border-radius 0.3s, background-color 0.3s, width 0.3s, height 0.3s;
     box-shadow: 0px 10px 10px black;
+    user-select: none;
 }
 
 .itemBox:hover {
     box-shadow: 1px 1px 5px white;
-    background-color: #0f1621;
-    margin-left: 1em;
     border-radius: 3em;
-    height: 95%;
-    width: 95%;
-}
-
-.itemBox:active .monsterImage {
-    height: 45%;
-    padding-top: 5%;
-}
-
-.itemBox:active {
-    background-color: #341724;
+    width: 390px;
+    height: 390px;
 }
 
 .monsterValues {
@@ -149,4 +144,29 @@ h1:hover, h2:hover {
     margin: 0;
     color: rgb(236, 154, 102);
 }
+
+@media only screen and (max-width: 600px) {
+    .itemBox {
+        width: 150px;
+        height: 150px;
+    }
+
+    .itemBox * {
+        font-size: small;
+    }
+
+    .itemBox:hover {
+        box-shadow: 1px 1px 5px white;
+        border-radius: 3em;
+        width: 160px;
+        height: 160px;
+    }
+
+    .monsterImage {
+        margin: 0;
+        margin-top: 0.5em;
+        height: 45%;
+    }
+}
+
 </style>

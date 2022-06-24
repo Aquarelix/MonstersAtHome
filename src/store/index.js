@@ -9,6 +9,7 @@ export default createStore({
       monstersSpent: 0,
       startingTime: new Date(),
       userSaveInterval: null,
+      monsterIntervall: null,
     }
   },
   getters: {
