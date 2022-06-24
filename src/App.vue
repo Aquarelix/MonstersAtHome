@@ -13,6 +13,9 @@ export default {
     // Check if user is logged in
     if(!isLoggedIn)
       this.$router.push("/login")
+
+  },
+  methods: {
   }
 }
 </script>
