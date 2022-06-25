@@ -1,15 +1,15 @@
 <template>
     <div class="header">
-        <img src="../assets/MonstersAtHomeBanner.png" alt="MonstersAtHomeBanner" class="banner">
+        <img @click="goHome" src="../assets/MonstersAtHomeBanner.png" alt="MonstersAtHomeBanner" class="banner">
         <nav>
-            <h1>Home</h1>
+            <h1 @click="goHome">Home</h1>
             <h1 @click="goToProfile">Profile</h1>
         </nav>
     </div>
     <div class="values" >
         <img src="../assets/SmallMonster.png" class="smallMonster">
-        <h3 class="monsterCounter" id="Monsters">You have {{ this.counter }} Monsters</h3>
-        <h3 class="monstersPerSecond" > and gain {{ this.counterRate }} per second</h3>
+        <h3 >You have <span class="monsterCounter" id="monsterCounter">{{ this.counter }}</span> Monsters</h3>
+        <h3> and gain <span class="monstersPerSecond" id="monstersPerSecond">{{ this.counterRate }}</span> per second</h3>
     </div>
 </template>
 
@@ -32,6 +32,9 @@ export default({
     methods: {
         goToProfile() {
             this.$router.push("/profile");
+        },
+        goHome() {
+            this.$router.push("/");
         }
     }
 })
@@ -46,6 +49,7 @@ export default({
 
 .banner {
     width: 50%;
+    cursor: pointer;
 }
 
 nav {
@@ -59,6 +63,7 @@ nav {
     background-color: #ebede9;
     user-select: none;
     width: 100%;
+
 }
 
 h1 {
@@ -66,8 +71,9 @@ h1 {
 }
 
 nav * {
-    padding: 1em;
+    padding: 0.5em;
     color: #172038;
+    cursor: pointer;
 }
 
 nav *:hover {
@@ -107,5 +113,10 @@ nav *:hover {
 
 .monstersPerSecond {
     padding: 0;
+}
+
+.monsterCounter {
+    transition: color 0.1s;
+    color: white
 }
 </style>

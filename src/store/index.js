@@ -68,6 +68,10 @@ export default createStore({
     increment(state) {
       state.count++;
       state.clicks++;
+
+      // Change the color of the Monster count 
+      const randomColor = Math.floor(((Math.random() * 16777215))).toString(16);  // To string in Hex 
+      document.getElementById("monsterCounter").style.color = "#" + randomColor;
     },
     decreaseCounter(state, counterDecreaseValue) {
       state.count = state.count - counterDecreaseValue;
@@ -80,6 +84,10 @@ export default createStore({
     },
     clickedOnMonster(state){
       state.monsterClicks++;
+
+      // Change the color of the MonstersPerSecond 
+      const randomColor = Math.floor(((Math.random() * 16777215))).toString(16);  // To string in Hex 
+      document.getElementById("monstersPerSecond").style.color = "#" + randomColor;
     }
   },
   actions: {
