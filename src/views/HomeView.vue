@@ -32,10 +32,15 @@ export default {
   created() {
   },
   mounted(){
-    setInterval(this.SaveUserData, 30000);
+    if(this.$store.state.userSaveInterval == null){
+      console.log("CREATING USER SAVE INTERVAL")
+      this.$store.state.userSaveInterval = setInterval(this.SaveUserDataOnDatabase, 30000);
+    }
+    //setInterval()
   },
   methods: {
-    SaveUserData(){
+    SaveUserDataOnDatabase(){
+      console.log("SAVING USER DATA TO DATABASE")
       const currentCounter = this.$store.state.count
       const currentRate = this.$store.state.counterRate
       const upgradeData = UpgradeComponentVue.methods.getAllUpgradeData()
@@ -48,6 +53,12 @@ export default {
       }, {
         withCredentials: true
       })
+    },
+    SaveUserStats(){
+
+    },
+    SaveUserStatsOnDatabase(){
+
     }
   }
 
