@@ -9,12 +9,15 @@
     <div class="profileContainer">
         <div class="statsContainer">
         <h1>Stats</h1>
-        <h1>Times clicked: {{this.clicks}}</h1>
-        <h1>Overall Monsters spent:  </h1>
-        <h1>Time spent here: </h1>
+        <h1>Times Clicked: {{this.totalClicks}}</h1>
+            <h1>Times clicked on Clicker: {{this.clicks}}</h1>
+            <h1>Times Clicked on Monster: {{this.monsterClicks}}</h1>
+        <h1>Overall Monsters spent: {{this.monstersSpent}}</h1>
+        <h1>Time spent here: {{this.timeOnWebsite}}</h1>
+        <h1>Account created at: {{this.userCreationDate}}</h1>
         </div>
         <div class="logout" >
-            <button @click="logoutUser"> Logout: {{this.username}}</button>
+            <button @click="logoutUser"> Logout: {{this.$cookies.get("username")}}</button>
         </div>
     </div>
 </template>
@@ -23,6 +26,10 @@
 import axios from "axios"
 import { mapGetters } from "vuex"
 export default {
+    data(){
+        return{
+        }
+    },
     methods: {
         logoutUser: async function (){
             await axios.get(process.env.VUE_APP_BASE_API_URL + "/auth/logout", {
@@ -41,8 +48,12 @@ export default {
     },
     computed: {
         ...mapGetters({
+            totalClicks: 'getIntegerTotalClicks',
             clicks: 'getIntegerClicks',
+            monsterClicks: 'getIntegerMonsterClicks',
             monstersSpent: 'getIntegerMonstersSpent',
+            timeOnWebsite: 'getTimeOnWebsite',
+            userCreationDate: 'getUserCreationDate'
         })
     },
 }

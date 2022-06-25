@@ -47,6 +47,10 @@ export default({
             const userSave = await this.GetUserData();
             const upgrades = await this.loadUpgrades();
 
+            console.log("USER SAVE:")
+            console.log(userSave)
+            console.log("ALL UPGRADES:")
+            console.log(upgrades)
             // Upgrades are missing -> no data
             if(!upgrades)
                 return undefined;
@@ -91,9 +95,7 @@ export default({
             console.log("Getting User DATA!");
 
             // Get the users data
-            return await axios.post(this.BASE_API_URL + "/api/userSave", {
-                username: this.$cookies.get("username")
-                },{
+            return await axios.get(this.BASE_API_URL + "/api/userSave",{
                     withCredentials: true
                 })
                 .then( (response) => {
