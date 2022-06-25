@@ -1,6 +1,6 @@
 <template>
     <div class="clickerContainer" @click="incrementCounter">
-    
+        <img src="../assets/ClickerImage.gif">
     </div>
 </template>
 
@@ -18,37 +18,24 @@ export default({
 <style scoped>
 
 .clickerContainer {
+    display: flex;
+    align-items: center;
+    align-self: center;
     box-shadow: 0px 10px 10px black;
-    width: 100%;
-    height: 15em;
-    background: url("../assets/ClickerImage.png") no-repeat;
-    background-position: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    background-size: contain;
     user-select: none;
+    cursor: pointer;
+    width: 80%;
+    border-radius: 1em;
+    margin-top: 1em;
+    background-color: #ebede9;
+}
+
+.clickerContainer img {
+    width: 100%;
 }
 
 .clickerContainer:hover {
-    background: url("../assets/Tanu.gif")
-}
-
-.clickerContainer:active {
-     background: url("../assets/Tanu.gif")
-}
-
-h1 {
-    margin: 0;
-    height: 0%;
-    color: white;
-    user-select: none;
-}
-
-@media only screen and (max-width: 800px) {
-    .clickerContainer {
-        background-size: 100%;
-        height: 5em;
-    }
-
+    box-shadow: 0px 0px 10px white;
 }
 
 </style>

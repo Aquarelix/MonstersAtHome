@@ -107,6 +107,7 @@ export default({
     transition: border-radius 0.3s, background-color 0.3s, width 0.3s, height 0.3s;
     box-shadow: 0px 10px 10px black;
     user-select: none;
+    cursor: pointer;
 }
 
 .itemBox:hover {

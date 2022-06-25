@@ -1,11 +1,5 @@
 <template>
-    <div class="header">
-        <img src="../assets/MonstersAtHomeBanner.png" alt="MonstersAtHomeBanner" class="banner" @click="goToHome">
-        <nav>
-            <h1 @click="goToHome">Home</h1>
-            <h1 >Profile</h1>
-        </nav>
-    </div>
+    <HeaderComponentVue />
     <div class="profileContainer">
         <div class="statsContainer">
         <h1>Stats</h1>
@@ -20,6 +14,7 @@
 </template>
 
 <script>
+import HeaderComponentVue from '@/components/HeaderComponent.vue'
 import axios from "axios"
 import { mapGetters } from "vuex"
 export default {
@@ -38,6 +33,9 @@ export default {
         goToHome() {
             this.$router.push("/");
         },
+    },
+    components: {
+        HeaderComponentVue,
     },
     computed: {
         ...mapGetters({
