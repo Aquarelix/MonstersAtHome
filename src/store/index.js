@@ -14,6 +14,7 @@ export default createStore({
       monsterIntervall: null,
       userCreationDate: 0,
       isFirstLoadDone: false,
+      OnHomeView: false,
     }
   },
   getters: {
@@ -102,6 +103,7 @@ export default createStore({
       state.monsterIntervall= null
       state.userCreationDate= 0
       state.isFirstLoadDone= false
+      state.OnHomeView= false
     }
   },
   actions: {

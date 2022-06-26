@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import HeaderComponentVue from '@/components/HeaderComponent.vue'
 import ClickerComponentVue from '@/components/ClickerComponent.vue'
 import UpgradeComponentVue from '@/components/UpgradeComponent.vue'
@@ -30,13 +29,23 @@ export default {
     UpgradeComponentVue
   },
   mounted(){
+    this.$store.state.OnHomeView = true;
+    
     if(this.$store.state.userSaveInterval == null)
+      // Save the progress of the user every 30 seconds
       this.$store.state.userSaveInterval = setInterval( () => {
-        this.SaveUserDataOnDatabase()
+        if(this.$store.state.OnHomeView){
+          this.SaveUserDataOnDatabase()
+        }
         this.SaveUserStatsOnDatabase()
       }, 30000);
     
     this.LoadUserStats()
+  },
+  beforeUnmount(){
+    // Save Users Data and Stats
+    this.SaveUserDataOnDatabase()
+    this.SaveUserStatsOnDatabase()
   },
   methods: {
     async LoadUserStats(){
@@ -44,38 +53,23 @@ export default {
         withCredentials: true
       }).then((response) => {
         const userStats = response.data.userStats;
-        console.log("LOAD USER STATS:")
-        console.log(userStats)
 
         if(!userStats)
           return;
         
+        // Set all Variables
         this.$store.state.clicks = userStats.timesClickedOnButton;
         this.$store.state.monsterClicks = userStats.timesClickedOnMonsters;
         this.$store.state.monstersSpent = userStats.totalSpendOnMonster;
         this.$store.state.userCreationDate = userStats.accountCreated;
-
-        if(userStats.totalTimeOnWebsite)
           this.$store.state.totalWebsiteTime = userStats.totalTimeOnWebsite;
-        else
-          this.$store.state.totalWebsiteTime = 0
+      }).catch(() => {
+        this.$cookies.set("isLoggedIn", false)
+        this.$router.push("/login")
 
-        console.log(this.$store.state.totalWebsiteTime)
-        console.log("USER DATA:")
-        const userData = {
-          clicks: this.$store.state.clicks,
-          monsterClicks: this.$store.state.monsterClicks,
-          monstersSpent : this.$store.state.monstersSpent,
-          userCreation: this.$store.state.userCreationDate,
-        }
-        console.log(userData)
-      }).catch((response) => {
-        console.log("ERROR USER STATS:")
-        console.log(response)
       })
     },
     SaveUserDataOnDatabase(){
-      console.log("SAVING USER DATA ON DATABASE")
       if(!JSON.parse(this.$cookies.get("isLoggedIn")))
         return;
 
@@ -83,14 +77,6 @@ export default {
       const currentCounter = this.$store.state.count
       const currentRate = this.$store.state.counterRate
       const upgradeData = UpgradeComponentVue.methods.getAllUpgradeData()
-
-      console.log(this.$store.getters.getCounter)
-      console.log({
-        username: this.$cookies.get("username"),
-        counter: Number(currentCounter),
-        counterRate: Number(currentRate),
-        upgradeBoxes: upgradeData
-      })
 
       axios.put(this.BASE_URL + "/api/userSave", {
         username: this.$cookies.get("username"),
@@ -100,17 +86,10 @@ export default {
       }, {
         withCredentials: true
       })
-      .catch((response) => {
-        console.log("SAVING USERSAVE ERROR ")
+      .catch(() => {
         this.$cookies.set("isLoggedIn", false)
         this.$router.push("/login")
-
-        console.log(response)
-        console.log(response.status)
       })
-    },
-    SaveUserStats(){
-
     },
     SaveUserStatsOnDatabase(){
       console.log("Saving User Stats")
@@ -131,10 +110,9 @@ export default {
         totalTimeOnWebsite: this.$store.getters.getTimeOnWebsiteInSeconds
       }, {
         withCredentials: true
-      }).then((response) => {
-        console.log(response)
-      }).catch((response) => {
-        console.log(response)
+      }).catch(() => {
+        this.$cookies.set("isLoggedIn", false)
+        this.$router.push("/login")
       })
     }
   }
