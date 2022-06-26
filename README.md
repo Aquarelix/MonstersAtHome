@@ -1,24 +1,36 @@
 # monsters_at_home
+## Name und Matrikelnummer
+* Marvin Pucknat, 34203
+* Henrik Weidner, 34216
 
-## Project setup
+## URL zu unserer Website und API
+* Website: https://monstersathome.netlify.app/
+* API: https://monsters-at-home-api.herokuapp.com/
+
+## Project Setup Website
+### Alle Packages installieren
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Kompilieren und starten
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+## Project Setup API
+### Postgresql installieren
 ```
-npm run build
+Postgresql herunterladen und installieren: https://www.postgresql.org/download/
+
+```
+### Alle Packages installieren
+```
+npm install
 ```
 
-### Lints and fixes files
+### API starten
 ```
-npm run lint
+npm run start
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

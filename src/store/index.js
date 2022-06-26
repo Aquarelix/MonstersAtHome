@@ -13,6 +13,7 @@ export default createStore({
       userSaveInterval: null,
       monsterIntervall: null,
       userCreationDate: 0,
+      isFirstLoadDone: false,
     }
   },
   getters: {
@@ -88,6 +89,19 @@ export default createStore({
       // Change the color of the MonstersPerSecond 
       const randomColor = Math.floor(((Math.random() * 16777215))).toString(16);  // To string in Hex 
       document.getElementById("monstersPerSecond").style.color = "#" + randomColor;
+    },
+    resetAllVariables(state){
+      state.count = 0
+      state.counterRate= 0
+      state.clicks= 0
+      state.monsterClicks= 0
+      state.monstersSpent= 0
+      state.startingTime= new Date()
+      state.totalWebsiteTime= 0
+      state.userSaveInterval= null
+      state.monsterIntervall= null
+      state.userCreationDate= 0
+      state.isFirstLoadDone= false
     }
   },
   actions: {

@@ -42,6 +42,11 @@ export default{
             BASE_API_URL: process.env.VUE_APP_BASE_API_URL,
         }
     },
+    created(){
+        this.$cookies.remove("isLoggedIn")
+        this.$cookies.remove("username")
+        this.$store.commit("resetAllVariables")
+    },
     methods: {
         ValidateLogin: async function (){
             console.log("Validating Login")

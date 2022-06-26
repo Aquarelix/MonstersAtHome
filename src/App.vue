@@ -14,7 +14,7 @@ export default {
     if(!isLoggedIn)
       this.$router.push("/login")
 
-    this.$store.state.startingTime = new Date();
+    this.$store.commit('resetAllVariables')
   },
   methods: {
   }
