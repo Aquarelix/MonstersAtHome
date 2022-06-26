@@ -33,7 +33,7 @@ Dann sollte ein ähnliches Ergebnis wie dieses dabei rauskommen:
 ```
 You are connected to database "postgres" as user "postgres" on host "localhost" (address "::1") at port "5432"
 ```
-Diese Daten können Sie dann direkt in die `.env` Datei eintragen.
+Sie können dann aus der Ausgabe den Host, Datenbank Name, den User Namen und den Port in die `.env` eintragen.
 ### Alle Packages installieren
 ```
 npm install
