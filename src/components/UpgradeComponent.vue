@@ -103,9 +103,12 @@ export default({
 
                 // If userdata exists -> set counter and counterRate
                 if(userData){
-                    // Set the User data
-                    this.$store.state.count = userData.counter;
-                    this.$store.state.counterRate = userData.counterRate;
+                    // Set the User data only on the first load of the website
+                    if(!this.$store.state.isFirstLoadDone){
+                        this.$store.state.count = userData.counter;
+                        this.$store.state.counterRate = userData.counterRate;
+                        this.$store.state.isFirstLoadDone = true;
+                    }
 
                     // Return the UpgradeBoxes
                     if(userData.upgradeBoxes){
