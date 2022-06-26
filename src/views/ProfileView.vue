@@ -2,17 +2,19 @@
     <HeaderComponentVue />
     <div class="profileContainer">
         <div class="statsContainer">
-        <h1>Stats</h1>
+        <h1 id="stats">Stats</h1>
         <h1>Times Clicked: {{this.totalClicks}}</h1>
-            <h1>Times clicked on Clicker: {{this.clicks}}</h1>
-            <h1>Times Clicked on Monster: {{this.monsterClicks}}</h1>
-        <h1>Overall Monsters spent: {{this.monstersSpent}}</h1>
-        <h1>Time spent here: {{this.timeOnWebsite}}</h1>
-        <h1>Account created at: {{this.userCreationDate}}</h1>
-        </div>
+            <h1>Clicked on Clicker: {{this.clicks}}</h1>
+            <h1>Clicked on Monster: {{this.monsterClicks}}</h1>
+        <h1>Spent on Monsters: {{this.monstersSpent}}</h1>
+        <h1>Time spent: {{this.timeOnWebsite}}</h1>
+        <h1>Created: {{this.userCreationDate}}</h1>
+
         <div class="logout" >
             <button @click="logoutUser"> Logout: {{this.$cookies.get("username")}}</button>
         </div>
+        </div>
+
     </div>
 </template>
 
@@ -69,6 +71,13 @@ export default {
     width: 50%;
 }
 
+#stats {
+    font-size: xx-large;
+    text-align: center;
+    color: aqua;
+    margin: 0;
+}
+
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -83,8 +92,7 @@ nav {
 }
 
 h1 {
-    margin: 0.2em;
-    font-weight: bolder;
+    text-align: left;
 }
 
 nav * {
@@ -107,12 +115,10 @@ nav *:hover {
 }
 
 .statsContainer {
-    padding: 10em;
+    padding: 2em;
     border: 1em solid #ebede9;
     border-radius: 2em;
-    border-top: 0em;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    margin-top: 2em;
 }
 
 button {
@@ -122,8 +128,24 @@ button {
     text-decoration: none;
     border: 0;
     border-radius: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0;
+    padding-bottom: 0;
     padding: 1em;
-    flex-direction: row;
+    cursor: pointer;
+    font-family: Alagard;
+}
+
+button:hover {
+    background-color: black;
+    color: #ebede9;
+    box-shadow: 0px 0px 0.5em white;
+}
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: medium;
+    }
 }
 
 </style>
