@@ -109,6 +109,9 @@ export default createStore({
     },
     setCurrentTab(state, tabName) {
       state.tabName = tabName;
+    },
+    setMonsterIntervall(state, intervall) {
+      state.monsterIntervall = intervall;
     }
   },
   actions: {

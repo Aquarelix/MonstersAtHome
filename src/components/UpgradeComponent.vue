@@ -19,16 +19,6 @@ export default({
             BASE_API_URL: process.env.VUE_APP_BASE_API_URL,
         }
     },
-    mounted() {
-        if (this.$store.state.monsterIntervall == null)
-        {
-            this.$store.state.monsterIntervall = setInterval(() => {
-                const count = Number(this.$store.state.count)
-                const counterRate = Number(this.$store.state.counterRate)
-                this.$store.state.count = count + counterRate
-            }, 1000)
-        }
-    },
     async created() {
         // Load all Upgrades
         this.allUpgradesData = await this.getAllUpgrades();
