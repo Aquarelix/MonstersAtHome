@@ -15,6 +15,7 @@ export default createStore({
       userCreationDate: 0,
       isFirstLoadDone: false,
       currentTab: "",
+      OnHomeView: false,
     }
   },
   getters: {
@@ -103,6 +104,7 @@ export default createStore({
       state.monsterIntervall= null
       state.userCreationDate= 0
       state.isFirstLoadDone= false
+      state.OnHomeView= false
       state.tabName = "home"
     },
     setCurrentTab(state, tabName) {

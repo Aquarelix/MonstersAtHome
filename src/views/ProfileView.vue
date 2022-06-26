@@ -27,6 +27,9 @@ export default {
         return{
         }
     },
+    mounted(){
+        this.$store.state.OnHomeView = false;
+    },
     methods: {
         logoutUser: async function (){
             await axios.get(process.env.VUE_APP_BASE_API_URL + "/auth/logout", {
