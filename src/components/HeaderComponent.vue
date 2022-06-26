@@ -2,8 +2,9 @@
     <div class="header">
         <img @click="goHome" src="../assets/MonstersAtHomeBanner.png" alt="MonstersAtHomeBanner" class="banner">
         <nav>
-            <h1 @click="goHome">Home</h1>
-            <h1 @click="goToProfile">Profile</h1>
+            <h1 @click="goHome" id="home">Home</h1>
+            <h1 @click="goToProfile" id="profile">Profile</h1>
+            <h1 @click="goToHowToPlay" id="howToPlay">How To Play</h1>
         </nav>
     </div>
     <div class="values" >
@@ -21,6 +22,7 @@ export default({
     data(){
         return {
             username: this.$cookies.get("username"),
+            currentTab: "",
         }
     },
     computed: {
@@ -29,12 +31,33 @@ export default({
             counterRate: 'getIntegerCounterRate',
         })
     },
+    mounted() {
+        document.getElementById(this.$store.state.tabName).style.color = "#da1c31";
+        this.currentTab = this.$store.state.tabName;
+    },
     methods: {
         goToProfile() {
+            this.resetColors();
+            this.$store.commit('setCurrentTab', "profile");
             this.$router.push("/profile");
         },
         goHome() {
+            this.resetColors();
+            this.$store.commit('setCurrentTab', "home");
             this.$router.push("/");
+        },
+        goToHowToPlay() {
+            this.resetColors();
+            this.$store.commit('setCurrentTab', "howToPlay");
+            this.$router.push("/howtoplay")
+        },
+        resetColors() {
+            if (this.currentTab != this.$store.state.tabName)
+            {
+                document.getElementById("howToPlay").style.color = "#172038";
+                document.getElementById("home").style.color = "#172038";
+                document.getElementById("profile").style.color = "#172038";
+            }
         }
     }
 })
@@ -118,5 +141,11 @@ nav *:hover {
 .monsterCounter {
     transition: color 0.1s;
     color: white
+}
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: medium;
+    }
 }
 </style>

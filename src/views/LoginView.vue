@@ -154,7 +154,7 @@ h1 {
     padding-top: 1em;
     border-radius: 1em;
     padding-bottom: 1em;
-
+    cursor: pointer;
     border: 0;
     background-color: white;
     max-width: 50%;
@@ -163,10 +163,11 @@ h1 {
 .submitButton:hover {
     background-color: black;
     color: white;
+    box-shadow: 0px 0px 0.1em white;
 }
 
 .submitButton:active {
-    box-shadow: 0em 0em 0.1em white;
+    box-shadow: 0em 0em 0.5em white;
 }
 
 .registerHere {

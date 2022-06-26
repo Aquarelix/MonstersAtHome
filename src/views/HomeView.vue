@@ -1,6 +1,6 @@
 <template>
+    <HeaderComponentVue />
   <div class="home">
-      <HeaderComponentVue />
       <div class="clicker">
         <ClickerComponentVue />
         <div class="upgrade">
@@ -144,12 +144,19 @@ export default {
 
 <!-- Scoped: you will only style the component-->
 <style scoped>
-
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .clicker{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 }
 
 .upgrade {

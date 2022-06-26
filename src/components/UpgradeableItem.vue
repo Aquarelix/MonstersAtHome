@@ -3,14 +3,20 @@
         <h1>{{this.name}}</h1>
         <img :src="this.img" alt="" class="monsterImage">
         <div class="monsterValues">
-            <h2> Costs: {{this.shownCurrentCost}} </h2>
-            <h2>{{this.name}}s: {{this.itemCounter}} Value: {{this.counterRate}}</h2>
+            <h2> Cost: {{this.shownCurrentCost}} </h2>
+            <h2>Level: {{this.itemCounter}} Value: {{this.counterRate}}</h2>
             <div class="notEnoughMoney" v-if="onNotEnoughMoney">
                 <span>No enough Monsters!</span>
             </div>
             <p hidden class="hiddenInfos">{ "id": {{this.upgradeId}}, "itemCounter": {{this.itemCounter}}, "currentCosts": {{this.currentCosts}}}</p>
         </div>
     </div>
+     <div class="questionBox" v-else>
+        <div class="itemBox">
+            <img src="../assets/NotFound.png" alt="" class="monsterImage">
+            <h2> Costs: {{this.shownCurrentCost}} </h2>
+        </div>
+     </div>
 </template>
 
 <script>
