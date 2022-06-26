@@ -62,7 +62,7 @@ export default createStore({
       return allTime;
     },
     getUserCreationDate(state){
-      return new Date(state.userCreationDate).toTimeString();
+      return (new Date(state.userCreationDate)).toLocaleString("de-DE");
     }
   },
   mutations: {
