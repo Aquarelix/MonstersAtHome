@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         logoutUser: async function (){
-            await axios.get(process.env.VUE_APP_BASE_API_URL + "/auth/logout", {
+            await axios.delete(process.env.VUE_APP_BASE_API_URL + "/auth/logout", {
                 withCredentials: true
             }).then(() => {
                 this.$router.push("/login");
