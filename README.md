@@ -21,11 +21,20 @@ npm run serve
 ## Setup der API
 ### Datenbank einrichten
 
-Postgresql herunterladen und installieren: https://www.postgresql.org/download/
+Postgresql herunterladen: https://www.postgresql.org/download/
 
-Danach `pgAdmin` starten. Hier werden Sie dann aufgefordert ein Passwort für den Standard User `postgres` festzulegen. Hier können Sie auch neue Datenbanken und User erstellen.
+Bei der Installation wird man aufgefordert die zu installierenden Komponenten auszuwählen, hierbei werden nur diese Komponenten für unsere Anwendung benötigt:
+* Postgresql
+* pgAdmin
+* Command Line Tools
 
-Jetzt müssen Sie nur noch die Daten zum verbinden der Datenbank in die `.env` Datei eintragen. Die Datei befindet sich im `Root Verzeichnis` der API.
+Nach der Auswahl der Komponenten wird man aufgefordert ein `Passwort` für die Datenbank einzugeben.
+
+Nach der Installation `pgAdmin` starten. Hier werden Sie dann aufgefordert das Passwort von der Installation einzugeben, das für danach auch für den Standard User `postgres` benutzt wird. In `pgAdmin` können Sie neue Datenbanken und Nutzer erstellen und verwalten.
+
+Um auf eine Datenbank zuzugreifen, müssen Sie jeweils auf den kleinen Pfeil bei `Server` -> `PostgreSQL` -> `Database` drücken. Jetzt sehen Sie alle Ihre Datenbanken und können mit einem Rechtsklick auf eine der Datenbanken das `Query Tool` öffnen, um direkt SQL Befehle auf der Datenbank auszuführen.
+
+Jetzt müssen Sie noch die Daten zum verbinden der Datenbank in die `.env` Datei eintragen. Die Datei befindet sich im `Root Verzeichnis` der API.
 
 Wenn Sie nicht wissen welche Daten in die Datei müssen, dann können Sie das Programm `SQL Shell (psql)` starten. Hier melden Sie sich dann an und geben den Befehl `\conninfo` ein.
 Dann sollte ein ähnliches Ergebnis wie dieses dabei rauskommen:
@@ -33,7 +42,7 @@ Dann sollte ein ähnliches Ergebnis wie dieses dabei rauskommen:
 ```
 You are connected to database "postgres" as user "postgres" on host "localhost" (address "::1") at port "5432"
 ```
-Sie können dann aus der Ausgabe den Host, Datenbank Name, den User Namen und den Port in die `.env` eintragen.
+Sie können dann sofort aus der Ausgabe den Host, Datenbank Name, den Username und den Port in die `.env` eintragen.
 ### Alle Packages installieren
 ```
 npm install
@@ -45,9 +54,6 @@ npm run start
 ```
 
 ## Kleine hilfe bei Postgresql
-### In pgAdmin SQL Befehle ausführen
-Im pgAdmin einfach in der Taskleiste `Tools` -> `Query Tool` auswählen.
-Hier können alle normalen SQL Befehle eingegeben werden.
 
 ### Inhalt einer Tabelle anzeigen lassen
 ``` sql
