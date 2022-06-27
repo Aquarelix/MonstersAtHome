@@ -33,14 +33,9 @@ export default({
     },
     methods: {
         async getAllUpgrades(){
-            console.log("Getting all Upgrades: ")
             const userSave = await this.GetUserData();
             const upgrades = await this.loadUpgrades();
 
-            console.log("USER SAVE:")
-            console.log(userSave)
-            console.log("ALL UPGRADES:")
-            console.log(upgrades)
             // Upgrades are missing -> no data
             if(!upgrades)
                 return undefined;
@@ -82,8 +77,6 @@ export default({
             })
         },
         async GetUserData(){
-            console.log("Getting User DATA!");
-
             // Get the users data
             return await axios.get(this.BASE_API_URL + "/api/userSave",{
                     withCredentials: true

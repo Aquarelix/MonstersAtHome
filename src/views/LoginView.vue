@@ -49,11 +49,9 @@ export default{
     },
     methods: {
         ValidateLogin: async function (){
-            console.log("Validating Login")
             this.SendAuthenticationRequest("/auth/login");
         },
         Registeruser: async function () {
-            console.log("Register User")
             this.SendAuthenticationRequest("/auth/register")
         },
         ToggleLogin() {
@@ -72,8 +70,6 @@ export default{
                 withCredentials: true,
             })
             .then((response) =>  {
-                console.log("LOGIN RESPONSE:")
-                console.log(response)
                 this.$cookies.set("isLoggedIn", true);
                 this.$cookies.set("username", response.data.username);
                 this.$router.push("/");

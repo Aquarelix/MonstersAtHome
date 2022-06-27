@@ -35,7 +35,6 @@ export default {
             await axios.get(process.env.VUE_APP_BASE_API_URL + "/auth/logout", {
                 withCredentials: true
             }).then( response => {
-                console.log(response);
                 this.$router.push("/login");
             })
             .catch(err => {

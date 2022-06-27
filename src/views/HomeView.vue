@@ -92,17 +92,9 @@ export default {
       })
     },
     SaveUserStatsOnDatabase(){
-      console.log("Saving User Stats")
       if(!JSON.parse(this.$cookies.get("isLoggedIn")))
         return;
-
-      const userData = {
-        timesClickedOnButton: this.$store.getters.getIntegerClicks,
-        timesClickedOnMonsters: this.$store.getters.getIntegerMonsterClicks,
-        totalSpendOnMonster: this.$store.getters.getMonstersSpent,
-        totalTimeOnWebsite: this.$store.getters.getTimeOnWebsiteInSeconds
-      }
-      console.log(userData)
+        
       axios.put(this.BASE_URL + "/api/userStats", {
         timesClickedOnButton: this.$store.state.clicks,
         timesClickedOnMonsters: this.$store.state.monsterClicks,

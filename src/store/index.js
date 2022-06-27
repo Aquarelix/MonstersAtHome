@@ -47,14 +47,10 @@ export default createStore({
       return state.monstersSpent;
     },
     getTimeOnWebsite(state){
-      console.log("GET TIME ON WEBSIE:")
       const currentTime = new Date();
       const currentTimeOnWebsite = (currentTime - state.startingTime)/1000;
       const allTime = currentTimeOnWebsite + state.totalWebsiteTime;
       
-      console.log(state.totalWebsiteTime)
-      console.log(currentTimeOnWebsite)
-      console.log(allTime)
       return new Date(allTime * 1000).toISOString().substr(11, 8);
     },
     getTimeOnWebsiteInSeconds(state){
