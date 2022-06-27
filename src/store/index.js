@@ -65,10 +65,13 @@ export default createStore({
     },
     getUserCreationDate(state){
       return (new Date(state.userCreationDate)).toLocaleString("de-DE");
+    },
+    getOnHomeView(state) {
+      return state.OnHomeView;
     }
   },
   mutations: {
-    increment(state) {
+    INCREMENT(state) {
       state.count++;
       state.clicks++;
 
@@ -76,23 +79,23 @@ export default createStore({
       const randomColor = Math.floor(((Math.random() * 16777215))).toString(16);  // To string in Hex 
       document.getElementById("monsterCounter").style.color = "#" + randomColor;
     },
-    decreaseCounter(state, counterDecreaseValue) {
+    DECREASE_COUNTER(state, counterDecreaseValue) {
       state.count = state.count - counterDecreaseValue;
     },
-    increaseCounterRate(state, counterRateIncrease) {
+    INCREASE_COUNTER_RATE(state, counterRateIncrease) {
       state.counterRate += counterRateIncrease;
     },
-    increaseOnMonsterSpent(state, counterIncrease){
+    INCREASE_ON_MONSTERS_SPENT(state, counterIncrease){
       state.monstersSpent += counterIncrease;
     },
-    clickedOnMonster(state){
+    CLICKED_ON_MONSTER(state){
       state.monsterClicks++;
 
       // Change the color of the MonstersPerSecond 
       const randomColor = Math.floor(((Math.random() * 16777215))).toString(16);  // To string in Hex 
       document.getElementById("monstersPerSecond").style.color = "#" + randomColor;
     },
-    resetAllVariables(state){
+    RESET_ALL_VARIABLES(state){
       state.count = 0
       state.counterRate= 0
       state.clicks= 0
@@ -107,14 +110,46 @@ export default createStore({
       state.OnHomeView= false
       state.tabName = "home"
     },
-    setCurrentTab(state, tabName) {
+    SET_CURRENT_TAB(state, tabName) {
       state.tabName = tabName;
     },
-    setMonsterIntervall(state, intervall) {
-      state.monsterIntervall = intervall;
+    SET_MONSTER_INTERVALL(state, interval) {
+      state.monsterIntervall = interval;
     }
   },
   actions: {
+    increment(context) {
+      context.commit('INCREMENT');
+
+      // Change the color of the Monster count 
+      const randomColor = Math.floor(((Math.random() * 16777215))).toString(16);  // To string in Hex 
+      document.getElementById("monsterCounter").style.color = "#" + randomColor;
+    },
+    decreaseCounter(context, counterDecreaseValue) {
+      context.commit('DECREASE_COUNTER', counterDecreaseValue);
+    },
+    increaseCounterRate(context, counterRateIncrease) {
+      context.commit('INCREASE_COUNTER_RATE', counterRateIncrease);
+    },
+    increaseOnMonsterSpent(context, counterIncrease){
+      context.commit('INCREASE_ON_MONSTERS_SPENT', counterIncrease)
+    },
+    clickedOnMonster(context){
+      context.commit('CLICKED_ON_MONSTER');
+
+      // Change the color of the MonstersPerSecond 
+      const randomColor = Math.floor(((Math.random() * 16777215))).toString(16);  // To string in Hex 
+      document.getElementById("monstersPerSecond").style.color = "#" + randomColor;
+    },
+    resetAllVariables(context){
+      context.commit('RESET_ALL_VARIABLES');
+    },
+    setCurrentTab(context, tabName) {
+      context.commit('SET_CURRENT_TAB', tabName);
+    },
+    setMonsterIntervall(context, intervall) {
+      context.commit('SET_MONSTER_INTERVALL', intervall);
+    }
   },
   modules: {
   }

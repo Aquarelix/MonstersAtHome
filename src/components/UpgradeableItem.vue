@@ -74,12 +74,12 @@ export default({
             // Can the Monster be bought?
             if(Number(this.$store.state.count) >= Number(this.currentCosts)){
                 // Increase Cost, Put it in Show, Decrease the Monster counter, Increase monsters per second
-                this.$store.commit('increaseOnMonsterSpent', this.currentCosts)
-                this.$store.commit('clickedOnMonster')
-                this.$store.commit('decreaseCounter', this.currentCosts)
+                this.$store.dispatch('increaseOnMonsterSpent', this.currentCosts)
+                this.$store.dispatch('clickedOnMonster')
+                this.$store.dispatch('decreaseCounter', this.currentCosts)
                 this.currentCosts = Number((this.currentCosts * (1 + (this.costIncrease / 100.0))))
                 this.shownCurrentCost = parseInt(this.currentCosts)
-                this.$store.commit('increaseCounterRate', this.counterRate)
+                this.$store.dispatch('increaseCounterRate', this.counterRate)
                 this.itemCounter++;
                 this.onNotEnoughMoney = false;
             }

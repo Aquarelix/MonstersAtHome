@@ -45,7 +45,7 @@ export default{
     created(){
         this.$cookies.remove("isLoggedIn")
         this.$cookies.remove("username")
-        this.$store.commit("resetAllVariables")
+        this.$store.dispatch("resetAllVariables")
     },
     methods: {
         ValidateLogin: async function (){

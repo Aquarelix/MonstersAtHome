@@ -14,7 +14,7 @@ export default {
     if(!isLoggedIn)
       this.$router.push("/login")
 
-    this.$store.commit('resetAllVariables')
+    this.$store.dispatch('resetAllVariables')
 
     // Set the monster intervall
     if (this.$store.state.monsterIntervall == null)
@@ -24,7 +24,7 @@ export default {
             const counterRate = Number(this.$store.state.counterRate)
             this.$store.state.count = count + counterRate
         }, 1000)
-        this.$store.commit('setMonsterIntervall', monsterIntervall)
+        this.$store.dispatch('setMonsterIntervall', monsterIntervall)
     }
   },
   methods: {

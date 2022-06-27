@@ -38,17 +38,17 @@ export default({
     methods: {
         goToProfile() {
             this.resetColors();
-            this.$store.commit('setCurrentTab', "profile");
+            this.$store.dispatch('setCurrentTab', "profile");
             this.$router.push("/profile");
         },
         goHome() {
             this.resetColors();
-            this.$store.commit('setCurrentTab', "home");
+            this.$store.dispatch('setCurrentTab', "home");
             this.$router.push("/");
         },
         goToHowToPlay() {
             this.resetColors();
-            this.$store.commit('setCurrentTab', "howToPlay");
+            this.$store.dispatch('setCurrentTab', "howToPlay");
             this.$router.push("/howtoplay")
         },
         resetColors() {
