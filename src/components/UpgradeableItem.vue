@@ -58,7 +58,7 @@ export default({
             this.img = require('../assets/' + this.image);
 
         }catch(error){
-            this.img = require('../assets/logo.png')
+            this.img = require('../assets/NotFound.png')
         }
             
     },
