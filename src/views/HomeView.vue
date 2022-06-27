@@ -39,18 +39,6 @@ export default {
         }
         this.SaveUserStatsOnDatabase()
       }, 30000);
-
-    // Set the monster intervall
-    if (this.$store.getters.getMonsterInterval == null)
-    {
-        var monsterIntervall = setInterval(() => {
-            const count = Number(this.$store.state.count)
-            const counterRate = Number(this.$store.state.counterRate)
-            this.$store.state.count = count + counterRate
-        }, 1000)
-        this.$store.dispatch('setMonsterIntervall', monsterIntervall)
-    }
-    
     this.LoadUserStats()
   },
   beforeUnmount(){
