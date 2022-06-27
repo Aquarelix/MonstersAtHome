@@ -35,6 +35,9 @@ export default {
             await axios.delete(process.env.VUE_APP_BASE_API_URL + "/auth/logout", {
                 withCredentials: true
             }).then(() => {
+                // Clear the Monster interval on logout
+                clearInterval(this.$store.getters.getMonsterInterval);
+                this.$store.dispatch('setMonsterIntervall', null);
                 this.$router.push("/login");
             })
             .catch(err => {

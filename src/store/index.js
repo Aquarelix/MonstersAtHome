@@ -64,6 +64,9 @@ export default createStore({
     },
     getOnHomeView(state) {
       return state.OnHomeView;
+    },
+    getMonsterInterval(state) {
+      return state.monsterIntervall;
     }
   },
   mutations: {

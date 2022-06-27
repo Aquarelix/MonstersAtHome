@@ -41,7 +41,7 @@ export default {
       }, 30000);
 
     // Set the monster intervall
-    if (this.$store.state.monsterIntervall == null)
+    if (this.$store.getters.getMonsterInterval == null)
     {
         var monsterIntervall = setInterval(() => {
             const count = Number(this.$store.state.count)
