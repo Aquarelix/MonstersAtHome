@@ -1,7 +1,4 @@
 # Monsters At Home
-## Name und Matrikelnummer
-* Marvin Pucknat, 34203
-* Henrik Weidner, 34216
 
 ## URL zu unserer Website und API
 * Website: https://monstersathome.netlify.app/
